@@ -1,0 +1,23 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @item.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @item.description %>
+</p>
+
+<h2>Categories:</h2>
+<% for category in Category.all %>
+  <div>
+    <% if @item.categories.include?(category) %>
+      <strong><%= category.name %></strong>
+    <% end %>
+  </div>
+<% end %>
+
+<%= link_to 'Edit', edit_item_path(@item) %> |
+<%= link_to 'Back', items_path %>
