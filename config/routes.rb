@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :ordered_items
+
   resources :customers
 
   resources :items
