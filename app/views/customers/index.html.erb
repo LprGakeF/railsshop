@@ -6,7 +6,8 @@
   <thead>
     <tr>
       <th><%= model_class.human_attribute_name(:id) %></th>
-      <th><%= model_class.human_attribute_name(:name) %></th>
+      <th><%= model_class.human_attribute_name(:forename) %></th>
+      <th><%= model_class.human_attribute_name(:surname) %></th>
       <th><%= model_class.human_attribute_name(:email) %></th>
       <th><%= model_class.human_attribute_name(:date_of_birth) %></th>
       <th><%= model_class.human_attribute_name(:created_at) %></th>
@@ -17,7 +18,8 @@
     <% @customers.each do |customer| %>
       <tr>
         <td><%= link_to customer.id, customer_path(customer) %></td>
-        <td><%= customer.name %></td>
+        <td><%= customer.forename %></td>
+        <td><%= customer.surname %></td>
         <td><%= customer.email %></td>
         <td><%= customer.date_of_birth %></td>
         <td><%=l customer.created_at %></td>

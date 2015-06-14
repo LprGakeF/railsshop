@@ -16,11 +16,18 @@
   <% end %>
 
   <div class="control-group">
-    <%= f.label :name, :class => 'control-label' %>
+    <%= f.label :forename, :class => 'control-label' %>
     <div class="controls">
-      <%= f.text_field :name, :class => 'form-control' %>
+      <%= f.text_field :forename, :class => 'form-control' %>
     </div>
-    <%= error_span(@customer[:name]) %>
+    <%= error_span(@customer[:forename]) %>
+  </div>
+  <div class="control-group">
+    <%= f.label :surname, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :surname, :class => 'form-control' %>
+    </div>
+    <%= error_span(@customer[:surname]) %>
   </div>
   <div class="control-group">
     <%= f.label :email, :class => 'control-label' %>

@@ -18,8 +18,10 @@
       <tr>
         <td><%= link_to ordered_item.id, ordered_item_path(ordered_item) %></td>
         <td><%= ordered_item.quantity %></td>
-        <td><%= ordered_item.item_id %></td>
-        <td><%= ordered_item.customer_id %></td>
+        <!--<td><%= ordered_item.item_id %></td>-->
+        <td><%= ordered_item.item.name %></td>
+        <!--<td><%= ordered_item.customer_id %></td>-->
+        <td><%= ordered_item.customer.surname %>
         <td><%=l ordered_item.created_at %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
