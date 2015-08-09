@@ -1,4 +1,8 @@
 class Customer < ActiveRecord::Base
+  # Include default devise modules. Others available are:
+  # :confirmable, :lockable, :timeoutable and :omniauthable
+  devise :confirmable, :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :trackable, :timeoutable, :validatable
   has_many :ordered_items, dependent: :restrict_with_exception
 
   validates :forename, presence: true

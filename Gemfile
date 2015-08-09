@@ -21,7 +21,7 @@ gem "twitter-bootstrap-rails"
 ##
 
 ## devise stuff
-gem 'devise'
+gem 'devise', git: 'https://github.com/plataformatec/devise'
 
 ## Datevalidator
 gem 'validates_timeliness', '~> 3.0'
