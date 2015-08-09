@@ -23,7 +23,10 @@ gem "twitter-bootstrap-rails"
 ## devise stuff
 gem 'devise', git: 'https://github.com/plataformatec/devise'
 
-## Datevalidator
+## letter_opener
+gem "letter_opener", git:'https://github.com/ryanb/letter_opener', :group => :development
+
+## datevalidator
 gem 'validates_timeliness', '~> 3.0'
 ##
 

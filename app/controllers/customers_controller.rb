@@ -1,8 +1,40 @@
 class CustomersController < ApplicationController
   before_action :set_customer, only: [:show, :edit, :update, :destroy]
-  #before_action :authenticate_customer!
+  before_action :authenticate_customer!
   # GET /customers
   # GET /customers.json
+
+  before_filter :configure_permitted_parameters, if: :devise_controller?
+
+   protected
+
+   def configure_permitted_parameters
+     devise_parameter_sanitizer.for(:sign_up) << :forename
+   end
+
+  #before_filter :configure_permitted_parameters
+
+#  protected
+
+  # my custom fields are :name, :heard_how
+  #def configure_permitted_parameters
+  #  devise_parameter_sanitizer.for(:sign_up) do |u|
+  #    u.permit(:forename, :surname, :date_of_birth,
+  #      :email, :password, :password_confirmation)
+  #  end
+
+    #def configure_permitted_parameters
+    #devise_parameter_sanitizer.for(:sign_up) << :forname, :surname, :date_of_birth
+    #end
+
+    #devise_parameter_sanitizer.for(:account_update) do |u|
+    #  u.permit(:name,
+    #    :email, :password, :password_confirmation, :current_password)
+    #end
+
+  #end
+
+
   def index
 
     @customers = Customer.all
