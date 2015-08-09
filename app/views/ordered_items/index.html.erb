@@ -14,8 +14,16 @@
     </tr>
   </thead>
   <tbody>
+
+    <!--raise Exception.new(@ordered_items.inspect-->
+
     <% @ordered_items.each do |ordered_item| %>
       <tr>
+
+
+
+
+
         <td><%= link_to ordered_item.id, ordered_item_path(ordered_item) %></td>
         <td><%= ordered_item.quantity %></td>
         <!--<td><%= ordered_item.item_id %></td>-->

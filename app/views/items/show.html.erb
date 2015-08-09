@@ -1,6 +1,11 @@
 <p id="notice"><%= notice %></p>
 
 <p>
+  <strong>ID:</strong>
+  <%= @item.id %>
+</p>
+
+<p>
   <strong>Name:</strong>
   <%= @item.name %>
 </p>
@@ -14,7 +19,7 @@
 <% for category in Category.all %>
   <div>
     <% if @item.categories.include?(category) %>
-      <strong><%= category.name %></strong>
+      <strong><%= category.id %></strong>
     <% end %>
   </div>
 <% end %>
