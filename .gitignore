@@ -16,3 +16,6 @@
 !/log/.keep
 /tmp
 *~
+
+# Ignore the paperclip images
+/public/system/*
