@@ -20,6 +20,9 @@
     <%= f.text_area :description %>
   </div>
 
+  <%= f.file_field :photo %> <!-- paperclip -->
+
+
   <h2>Categories</h2>
   <% for category in Category.all %>
   <!--todo hidden field workafor unselect all possible-->

@@ -28,7 +28,9 @@ gem "letter_opener", git:'https://github.com/ryanb/letter_opener', :group => :de
 
 ## datevalidator
 gem 'validates_timeliness', '~> 3.0'
-##
+
+## paperclip
+gem "paperclip", :git => "git://github.com/thoughtbot/paperclip.git"
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
