@@ -5,6 +5,11 @@ class CreateOrderedItems < ActiveRecord::Migration
       t.references :item, index: true
       t.references :customer, index: true
 
+      t.boolean :is_in_process, :default => false
+      t.boolean :is_dispatched, :default => false
+      t.boolean :is_delivered, :default => false
+      t.boolean :is_rejected, :default => false
+
       t.timestamps null: false
     end
     add_foreign_key :ordered_items, :items

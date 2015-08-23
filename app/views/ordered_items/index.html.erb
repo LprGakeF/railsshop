@@ -10,6 +10,7 @@
       <th><%= model_class.human_attribute_name(:item_id) %></th>
       <th><%= model_class.human_attribute_name(:customer_id) %></th>
       <th><%= model_class.human_attribute_name(:created_at) %></th>
+      <th><%= "Status" %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
@@ -17,12 +18,18 @@
 
     <!--raise Exception.new(@ordered_items.inspect-->
 
+  <% if current_customer %>
+    <% if current_customer.admin? %>
+      <p id="admintxt">You are an admin!</p>
+    <% else %>
+      <p id="admintxt">You are not an admin!</p>
+    <% end %>
+  <% else %>
+    <p>Da anmeldezwang dar es hierzu nicht kommen</p>
+  <% end %>
+
     <% @ordered_items.each do |ordered_item| %>
       <tr>
-
-
-
-
 
         <td><%= link_to ordered_item.id, ordered_item_path(ordered_item) %></td>
         <td><%= ordered_item.quantity %></td>
@@ -30,7 +37,28 @@
         <td><%= ordered_item.item.name %></td>
         <!--<td><%= ordered_item.customer_id %></td>-->
         <td><%= ordered_item.customer.surname %>
-        <td><%=l ordered_item.created_at %></td>
+
+        <td><%=l ordered_item.created_at, :format => :long %></td>
+
+          <% if ordered_item.is_rejected %>
+            <td>order rejected</td>
+          <% else %>
+            <% if ordered_item.is_delivered %>
+              <td>order delivered</td>
+            <% else %>
+              <% if ordered_item.is_dispatched %>
+                <td>order dispatched</td>
+                <% else %>
+                  <% if ordered_item.is_in_process %>
+                    <td>order in process</td>
+                  <% else %>
+                    <td>order received</td>
+                  <% end %>
+                  <% end %>
+                  <% end %>
+                  <% end %>
+
+
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       edit_ordered_item_path(ordered_item), :class => 'btn btn-default btn-xs' %>

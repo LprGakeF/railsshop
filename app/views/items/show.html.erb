@@ -21,10 +21,58 @@
 <% for category in Category.all %>
   <div>
     <% if @item.categories.include?(category) %>
-      <strong><%= category.id %></strong>
+      <strong><%= category.name %></strong>
     <% end %>
   </div>
 <% end %>
+
+
+<%= form_for @ordered_item = OrderedItem.new, :html => { :class => "form-horizontal ordered_item" } do |f| %>
+
+    <% if @ordered_item.errors.any? %>
+    <div id="error_expl" class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= pluralize(@ordered_item.errors.count, "error") %> prohibited this ordered_item from being saved:</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+        <% @ordered_item.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="control-group">
+    <%= f.label :quantity, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :quantity, :class => 'form-control' %>
+    </div>
+    <%= error_span(@ordered_item[:quantity]) %>
+  </div>
+
+<%= f.hidden_field :item_id, :value => @item.id %>
+<%= f.hidden_field :customer_id, :value => current_customer.id %>
+
+  <h2>Categories:</h2>
+  <% for category in Category.all %>
+    <div>
+      <% if category.items.exists? %>
+        <strong><%= category.name %></strong>
+      <% end %>
+    </div>
+  <% end %>
+
+
+
+  <%= f.submit nil, :class => 'btn btn-primary' %>
+  <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+            ordered_items_path, :class => 'btn btn-default' %>
+
+<% end %>
+
+
 
 <%= link_to 'Edit', edit_item_path(@item) %> |
 <%= link_to 'Back', items_path %>

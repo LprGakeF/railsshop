@@ -38,6 +38,26 @@
   </div>
 
 
+  <h2>Categories:</h2>
+  <% for category in Category.all %>
+    <div>
+      <% if category.items.exists? %>
+        <strong><%= category.name %></strong>
+      <% end %>
+    </div>
+  <% end %>
+
+  <h2>Items:</h2>
+  <% for item in Item.all %>
+    <div>
+
+        <strong><%= item.name %></strong>
+
+    </div>
+  <% end %>
+
+
+
   <%= f.submit nil, :class => 'btn btn-primary' %>
   <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
             ordered_items_path, :class => 'btn btn-default' %>
