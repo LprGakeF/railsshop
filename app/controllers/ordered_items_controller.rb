@@ -4,7 +4,11 @@ class OrderedItemsController < ApplicationController
   # GET /ordered_items
   # GET /ordered_items.json
   def index
-    @ordered_items = OrderedItem.all
+    if current_customer.admin?
+      @ordered_items = OrderedItem.all
+    else
+      @ordered_items = OrderedItem.all.where(:customer_id => current_customer.id)
+    end
   end
 
   # GET /ordered_items/1
