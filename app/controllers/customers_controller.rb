@@ -4,8 +4,6 @@ class CustomersController < ApplicationController
   # GET /customers
   # GET /customers.json
 
-
-
   #before_filter :configure_permitted_parameters
 
 #  protected

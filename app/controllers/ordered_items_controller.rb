@@ -1,5 +1,7 @@
 class OrderedItemsController < ApplicationController
   before_action :set_ordered_item, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_customer!
+  before_action :check_admin, only: [:edit, :update, :destroy]
 
   # GET /ordered_items
   # GET /ordered_items.json
@@ -74,5 +76,11 @@ class OrderedItemsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def ordered_item_params
       params.require(:ordered_item).permit(:quantity, :item_id, :customer_id)
+    end
+
+    def check_admin
+      unless current_customer.admin?
+        redirect_to(root_url)
+      end
     end
 end
