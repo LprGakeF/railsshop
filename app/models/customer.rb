@@ -5,6 +5,8 @@ class Customer < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :timeoutable, :validatable
   has_many :ordered_items, dependent: :restrict_with_exception
 
+  has_one :address, :dependent => :destroy
+
   validates :forename, presence: true
 
   validates :surname, presence: true
