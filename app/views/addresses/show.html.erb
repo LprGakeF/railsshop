@@ -1,4 +1,27 @@
-<p id="notice"><%= notice %></p>
+<%- model_class = Address -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
+</div>
 
-<%= link_to 'Edit', edit_address_path(@address) %> |
-<%= link_to 'Back', addresses_path %>
+<dl class="dl-horizontal">
+  <dt><strong><%= model_class.human_attribute_name(:street) %>:</strong></dt>
+  <dd><%= @address.street %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:house_number) %>:</strong></dt>
+  <dd><%= @address.house_number %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:postcode) %>:</strong></dt>
+  <dd><%= @address.postcode %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:country) %>:</strong></dt>
+  <dd><%= @address.country %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:customer_id) %>:</strong></dt>
+  <dd><%= @address.customer_id %></dd>
+</dl>
+
+<%= link_to t('.back', :default => t("helpers.links.back")),
+              addresses_path, :class => 'btn btn-default'  %>
+<%= link_to t('.edit', :default => t("helpers.links.edit")),
+              edit_address_path(@address), :class => 'btn btn-default' %>
+<%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+              address_path(@address),
+              :method => 'delete',
+              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+              :class => 'btn btn-danger' %>
