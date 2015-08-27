@@ -11,10 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150823194122) do
-
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
+ActiveRecord::Schema.define(version: 20150827203342) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name"
@@ -27,8 +24,8 @@ ActiveRecord::Schema.define(version: 20150823194122) do
     t.integer "item_id",     null: false
   end
 
-  add_index "categories_items", ["category_id", "item_id"], name: "index_categories_items_on_category_id_and_item_id", using: :btree
-  add_index "categories_items", ["item_id", "category_id"], name: "index_categories_items_on_item_id_and_category_id", using: :btree
+  add_index "categories_items", ["category_id", "item_id"], name: "index_categories_items_on_category_id_and_item_id"
+  add_index "categories_items", ["item_id", "category_id"], name: "index_categories_items_on_item_id_and_category_id"
 
   create_table "customers", force: :cascade do |t|
     t.string   "forename"
@@ -53,18 +50,20 @@ ActiveRecord::Schema.define(version: 20150823194122) do
     t.boolean  "admin",                  default: false
   end
 
-  add_index "customers", ["email"], name: "index_customers_on_email", unique: true, using: :btree
-  add_index "customers", ["reset_password_token"], name: "index_customers_on_reset_password_token", unique: true, using: :btree
+  add_index "customers", ["email"], name: "index_customers_on_email", unique: true
+  add_index "customers", ["reset_password_token"], name: "index_customers_on_reset_password_token", unique: true
 
   create_table "items", force: :cascade do |t|
     t.string   "name"
     t.text     "description"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
+    t.datetime "created_at",                                                  null: false
+    t.datetime "updated_at",                                                  null: false
     t.string   "photo_file_name"
     t.string   "photo_content_type"
     t.integer  "photo_file_size"
     t.datetime "photo_updated_at"
+    t.decimal  "price",              precision: 12, scale: 2
+    t.string   "currency",                                    default: "EUR"
   end
 
   create_table "ordered_items", force: :cascade do |t|
@@ -77,11 +76,10 @@ ActiveRecord::Schema.define(version: 20150823194122) do
     t.boolean  "is_rejected",   default: false
     t.datetime "created_at",                    null: false
     t.datetime "updated_at",                    null: false
+    t.boolean  "paid"
   end
 
-  add_index "ordered_items", ["customer_id"], name: "index_ordered_items_on_customer_id", using: :btree
-  add_index "ordered_items", ["item_id"], name: "index_ordered_items_on_item_id", using: :btree
+  add_index "ordered_items", ["customer_id"], name: "index_ordered_items_on_customer_id"
+  add_index "ordered_items", ["item_id"], name: "index_ordered_items_on_item_id"
 
-  add_foreign_key "ordered_items", "customers"
-  add_foreign_key "ordered_items", "items"
 end
