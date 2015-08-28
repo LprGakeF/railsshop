@@ -1,10 +1,22 @@
 class ItemsController < ApplicationController
   before_action :set_item, only: [:show, :edit, :update, :destroy]
 
-  # GET /items
-  # GET /items.json
   def index
-    @items = Item.all
+    if params.has_key?(:categories)
+      category_name = params[:categories]
+      @items = Item.all
+      @new_items = Array.new
+      @items.each do |i|
+        i.categories.each do |c|
+          if c.name == category_name
+            @new_items.append(i)
+          end
+        end
+      end
+      @items = @new_items
+    else
+      @items = Item.all
+    end
   end
 
   # GET /items/1
