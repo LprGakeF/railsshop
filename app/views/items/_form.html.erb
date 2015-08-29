@@ -1,44 +1,83 @@
-<%= form_for(@item) do |f| %>
-  <% if @item.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@item.errors.count, "error") %> prohibited this item from being saved:</h2>
+<%= form_for @item, :html => { :class => "form-horizontal item" } do |f| %>
 
-      <ul>
-      <% @item.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+    <% if @item.errors.any? %>
+    <div id="error_expl" class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= pluralize(@item.errors.count, "error") %> prohibited this item from being saved:</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+        <% @item.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :description %><br>
-    <%= f.text_area :description %>
-  </div>
-
+  <!-- ATT -->
   <%= f.file_field :photo %>
 
-
-  <h2>Categories</h2>
-  <% for category in Category.all %>
-  <!--todo hidden field workafor unselect all possible-->
-    <div>
-      <%= hidden_field_tag("item[category_ids][]", nil) %>
-      <%= check_box_tag "item[category_ids][]",
-      category.id,
-      @item.categories.include?(category) %>
-
-      <%= category.name %>
+  <div class="control-group">
+    <%= f.label :name, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :name, :class => 'form-control' %>
     </div>
-  <% end %>
-
-  <hr />
-
-  <div class="actions">
-    <%= f.submit %>
+    <%= error_span(@item[:name]) %>
   </div>
+  <div class="control-group">
+    <%= f.label :description, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_area :description, :class => 'form-control' %>
+    </div>
+    <%= error_span(@item[:description]) %>
+  </div>
+  <div class="control-group">
+    <%= f.label :photo_file_name, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :photo_file_name, :class => 'form-control' %>
+    </div>
+    <%= error_span(@item[:photo_file_name]) %>
+  </div>
+  <div class="control-group">
+    <%= f.label :photo_content_type, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :photo_content_type, :class => 'form-control' %>
+    </div>
+    <%= error_span(@item[:photo_content_type]) %>
+  </div>
+  <div class="control-group">
+    <%= f.label :photo_file_size, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :photo_file_size, :class => 'form-control' %>
+    </div>
+    <%= error_span(@item[:photo_file_size]) %>
+  </div>
+  <div class="control-group">
+    <%= f.label :photo_updated_at, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :photo_updated_at, :class => 'form-control' %>
+    </div>
+    <%= error_span(@item[:photo_updated_at]) %>
+  </div>
+  <div class="control-group">
+    <%= f.label :price, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :price, :class => 'form-control' %>
+    </div>
+    <%= error_span(@item[:price]) %>
+  </div>
+  <div class="control-group">
+    <%= f.label :currency, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :currency, :class => 'form-control' %>
+    </div>
+    <%= error_span(@item[:currency]) %>
+  </div>
+
+
+  <%= f.submit nil, :class => 'btn btn-primary' %>
+  <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+            items_path, :class => 'btn btn-default' %>
+
 <% end %>

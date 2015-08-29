@@ -19,3 +19,6 @@
 
 # Ignore the paperclip images
 /public/system/*
+
+# Ignore replaced views
+/app/views/*_*

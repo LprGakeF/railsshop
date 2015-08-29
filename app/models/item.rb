@@ -5,10 +5,10 @@ class Item < ActiveRecord::Base
 
   has_attached_file :photo,
     :styles =>  { :medium     => "400x400>",
-                  :miniature  => "50x50>"
+                  :small  => "100x100>"
                 },
+    #:default_url => "/images/:style/no_image_available.png"
     :default_url => "/images/:style/missing.png"
-
     validates_attachment_size :photo, :less_than => 512.kilobytes
     validates_attachment_file_name :photo, :matches => [/png\Z/, /jpe?g\Z/]
     validates_attachment_content_type :photo, :content_type => /\Aimage/

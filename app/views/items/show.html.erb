@@ -15,7 +15,7 @@
   <%= @item.description %>
 </p>
 
-<%= image_tag @item.photo.url(:medium) %> <!-- paperclip -->
+<%= image_tag @item.photo.url(:medium) %>
 
 <h2>Categories:</h2>
 <% for category in Category.all %>
