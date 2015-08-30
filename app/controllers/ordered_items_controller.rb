@@ -35,11 +35,10 @@ class OrderedItemsController < ApplicationController
     params[:customer_id] = current_customer.id
     #@ordered_item = OrderedItem.new(ordered_item_params)
     @ordered_item = OrderedItem.new(params)
-    p current_customer.id
 
     respond_to do |format|
       if @ordered_item.save
-        format.html { redirect_to @ordered_item, notice: 'Ordered item was successfully created.' }
+        format.html { redirect_to root_url, notice: 'Ordered item was successfully created.' }
         format.json { render :show, status: :created, location: @ordered_item }
       else
         format.html { render :new }

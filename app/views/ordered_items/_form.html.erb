@@ -22,6 +22,7 @@
     </div>
     <%= error_span(@ordered_item[:quantity]) %>
   </div>
+  <!--
   <div class="control-group">
     <%= f.label :item_id, :class => 'control-label' %>
     <div class="controls">
@@ -33,7 +34,8 @@
     <%= f.label :customer_id, :class => 'control-label' %>
     <div class="controls">
       <%= f.text_field :customer_id, :class => 'form-control' %>
-    </div>
+    </div>-->
+    <%= f.hidden_field :item_id %>
     <%= error_span(@ordered_item[:customer_id]) %>
   </div>
 
