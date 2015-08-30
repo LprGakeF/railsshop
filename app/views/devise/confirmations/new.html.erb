@@ -3,9 +3,18 @@
 <%= form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f| %>
   <%= devise_error_messages! %>
 
+<% flash.each do |key, value| %>
+<div class="message">
+   <div class="alert-message <%= key %> fade in">
+    <a class="close" href="#">&times</a>
+    <center><strong><%= value %></strong></center>
+  </div>
+</div>
+<% end %>
+
   <div class="field">
     <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email) %> 
+    <%= f.email_field :email, autofocus: true, value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email) %>
   </div>
 
   <div class="actions">

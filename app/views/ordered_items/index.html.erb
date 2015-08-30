@@ -5,13 +5,15 @@
 <table class="table table-striped">
   <thead>
     <tr>
-      <th><%= model_class.human_attribute_name(:id) %></th>
+      <th><%= model_class.human_attribute_name('Order number') %></th>
       <th><%= model_class.human_attribute_name(:quantity) %></th>
       <th><%= model_class.human_attribute_name(:item_id) %></th>
       <th><%= model_class.human_attribute_name(:customer_id) %></th>
       <th><%= model_class.human_attribute_name(:created_at) %></th>
       <th><%= "Status" %></th>
-      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+      <% if current_customer.try(:admin?) %>
+        <th><%=t '.actions', :default => t("helpers.actions") %></th>
+      <% end %>
     </tr>
   </thead>
   <tbody>
@@ -50,6 +52,7 @@
 
 
         <td>
+          <% if current_customer.try(:admin?) %>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       edit_ordered_item_path(ordered_item), :class => 'btn btn-default btn-xs' %>
           <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
@@ -59,6 +62,7 @@
                       :class => 'btn btn-xs btn-danger' %>
         </td>
       </tr>
+      <% end %>
     <% end %>
   </tbody>
 </table>

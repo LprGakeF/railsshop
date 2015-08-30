@@ -1,0 +1,5 @@
+<% if current_customer.try(:admin?) %>
+  <%= render :partial => 'ordered_items/admin_show' %>
+<% else %>
+  <%= render :partial => 'ordered_items/customer_show' %>
+<% end %>
