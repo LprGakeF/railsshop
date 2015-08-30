@@ -76,7 +76,6 @@ ActiveRecord::Schema.define(version: 20150830220629) do
     t.datetime "photo_updated_at"
     t.decimal  "price",              precision: 12, scale: 2
     t.string   "currency",                                    default: "EUR"
-    t.string   "quantitiy_unit"
     t.string   "quantity_unit"
   end
 
