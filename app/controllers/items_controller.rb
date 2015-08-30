@@ -1,5 +1,7 @@
 class ItemsController < ApplicationController
   before_action :set_item, only: [:show, :edit, :update, :destroy]
+  before_action :check_admin, only: [:new, :edit, :create, :update, :destroy]
+
 
   def index
     if params.has_key?(:categories)
@@ -83,4 +85,16 @@ class ItemsController < ApplicationController
     def item_params
       params.require(:item).permit(:price, :photo, :name, :description, :category_ids => [])
     end
+
+    def check_admin
+      unless current_customer.try(:admin?)
+        redirect_to(root_url)
+      end
+    end
+
+    #def check_signed_in
+    #  unless customer_signed_in?
+    #    redirect_to(root_url)
+    #  end
+    #end
 end

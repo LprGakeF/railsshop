@@ -52,8 +52,7 @@
     <%= error_span(@ordered_item[:quantity]) %>
   </div>
 
-<%= f.hidden_field :item_id, :value => @item.id %>
-<%= f.hidden_field :customer_id, :value => current_customer.id %>
+  <%= f.hidden_field :item_id, :value => @item.id %>
 
   <h2>Categories:</h2>
   <% for category in Category.all %>
@@ -66,7 +65,7 @@
 
 
 
-  <%= f.submit nil, :class => 'btn btn-primary' %>
+  <%= f.submit "Purchase", :class => 'btn btn-primary' %>
   <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
             ordered_items_path, :class => 'btn btn-default' %>
 

@@ -21,4 +21,4 @@
 /public/system/*
 
 # Ignore replaced views
-/app/views/*_*
+/app/views/*_

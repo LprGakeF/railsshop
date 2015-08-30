@@ -30,7 +30,12 @@ class OrderedItemsController < ApplicationController
   # POST /ordered_items
   # POST /ordered_items.json
   def create
-    @ordered_item = OrderedItem.new(ordered_item_params)
+    #@ordered_item = OrderedItem.new(ordered_item_params)
+    params = ordered_item_params
+    params[:customer_id] = current_customer.id
+    #@ordered_item = OrderedItem.new(ordered_item_params)
+    @ordered_item = OrderedItem.new(params)
+    p current_customer.id
 
     respond_to do |format|
       if @ordered_item.save
@@ -76,6 +81,8 @@ class OrderedItemsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def ordered_item_params
       params.require(:ordered_item).permit(:quantity, :item_id, :customer_id)
+      #params.require(:ordered_item).permit(:quantity, :item_id)
+
     end
 
     def check_admin
