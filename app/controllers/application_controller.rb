@@ -5,12 +5,16 @@ class ApplicationController < ActionController::Base
 
   before_filter :configure_permitted_parameters, if: :devise_controller?
 
+  rescue_from ActiveRecord::DeleteRestrictionError do |exception|
+    redirect_to(:back, :alert => exception.message)
+  end
+
   protected
 
   # my custom fields are :name, :heard_how
   def configure_permitted_parameters
     devise_parameter_sanitizer.for(:sign_up) do |u|
-      u.permit(:forename, :surname, :date_of_birth, 
+      u.permit(:forename, :surname, :date_of_birth,
       :email, :password, :password_confirmation)
       end
     end

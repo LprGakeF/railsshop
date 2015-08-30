@@ -36,11 +36,11 @@
       <%= f.text_field :customer_id, :class => 'form-control' %>
     </div>-->
     <%= f.hidden_field :item_id %>
-    <%= error_span(@ordered_item[:customer_id]) %>
-  </div>
+    <!--<%= error_span(@ordered_item[:customer_id]) %>-->
 
 
-  <h2>Categories:</h2>
+
+  <!--<h2>Categories:</h2>
   <% for category in Category.all %>
     <div>
       <% if category.items.exists? %>
@@ -56,12 +56,12 @@
         <strong><%= item.name %></strong>
 
     </div>
-  <% end %>
+  <% end %>-->
 
 
 
-  <%= f.submit nil, :class => 'btn btn-primary' %>
+  <%= f.submit 'Purchase', :class => 'btn btn-primary' %>
   <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
             ordered_items_path, :class => 'btn btn-default' %>
-
+          </div>
 <% end %>
