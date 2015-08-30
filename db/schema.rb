@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150827204505) do
+ActiveRecord::Schema.define(version: 20150830220629) do
 
   create_table "addresses", force: :cascade do |t|
     t.string   "street"
@@ -76,6 +76,8 @@ ActiveRecord::Schema.define(version: 20150827204505) do
     t.datetime "photo_updated_at"
     t.decimal  "price",              precision: 12, scale: 2
     t.string   "currency",                                    default: "EUR"
+    t.string   "quantitiy_unit"
+    t.string   "quantity_unit"
   end
 
   create_table "ordered_items", force: :cascade do |t|

@@ -33,6 +33,13 @@
     <%= error_span(@item[:description]) %>
   </div>
   <div class="control-group">
+    <%= f.label :quantity_unit, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :quantity_unit, :class => 'form-control' %>
+    </div>
+    <%= error_span(@item[:quantity_unit]) %>
+  </div>
+  <div class="control-group">
     <%= f.label :photo_file_name, :class => 'control-label' %>
     <div class="controls">
       <%= f.text_field :photo_file_name, :class => 'form-control' %>

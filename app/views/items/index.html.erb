@@ -13,6 +13,7 @@
       <th><%= model_class.human_attribute_name(:photo_content_type) %></th>
       <th><%= model_class.human_attribute_name(:photo_file_size) %></th>
       <th><%= model_class.human_attribute_name(:photo_updated_at) %></th>-->
+      <th style="white-space:nowrap;"><%= model_class.human_attribute_name(:quantitiy_unit) %></th>
       <th><%= model_class.human_attribute_name(:price) %></th>
       <th><%= model_class.human_attribute_name(:currency) %></th>
       <!--<th><%= model_class.human_attribute_name(:created_at) %></th>-->
@@ -33,6 +34,7 @@
         <td><%= item.photo_content_type %></td>
         <td><%= item.photo_file_size %></td>
         <td><%= item.photo_updated_at %></td>-->
+        <td><%= item.quantity_unit %></td>
         <td><%= item.price %></td>
         <td><%= item.currency %></td>
         <!--<td><%=l item.created_at %></td>-->
