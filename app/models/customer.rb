@@ -6,13 +6,14 @@ class Customer < ActiveRecord::Base
   has_many :ordered_items, dependent: :restrict_with_exception
 
   has_one :address, :dependent => :destroy
+  accepts_nested_attributes_for :address
 
-  validates :forename, presence: true
+  validates :forename, length: { in: 2..32 }
+  validates :surname, length: { in: 2..32 }
 
-  validates :surname, presence: true
+  validates_date :date_of_birth, :on_or_before => lambda { 18.years.ago },
+    :on_or_before_message => "you must be at least 18 years old"
 
-  validates :email, presence: true
-
-  validates_date :date_of_birth, :before => lambda { 18.years.ago },
-                               :before_message => "You must be at least 18 years old"
+  validates_date :date_of_birth, :on_or_after => lambda { 150.years.ago },
+    :on_or_after_message => "you must not be older least 150"
 end
