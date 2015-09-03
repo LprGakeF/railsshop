@@ -38,6 +38,12 @@ class OrderedItemsController < ApplicationController
 
     respond_to do |format|
       if @ordered_item.save
+        CustomerMailer.test_email(current_customer).deliver
+        p 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
+        p @ordered_item.customer.email
+        p 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
+        p current_customer.email
+        p 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
         format.html { redirect_to root_url, notice: 'Ordered item was successfully created.' }
         format.json { render :show, status: :created, location: @ordered_item }
       else

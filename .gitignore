@@ -22,3 +22,6 @@
 
 # Ignore replaced views
 /app/views/*_
+
+# Contains username and password
+config/initializers/setup_mail.rb
