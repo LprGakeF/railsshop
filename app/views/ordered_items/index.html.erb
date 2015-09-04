@@ -52,7 +52,7 @@
 
 
         <td>
-          <% if current_customer.try(:admin?) %>
+          <% unless current_customer.try(:admin?) %>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       edit_ordered_item_path(ordered_item), :class => 'btn btn-default btn-xs' %>
           <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
