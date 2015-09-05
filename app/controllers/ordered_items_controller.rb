@@ -1,7 +1,7 @@
 class OrderedItemsController < ApplicationController
   before_action :set_ordered_item, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_customer!
-  before_action :check_admin, only: [:edit, :update, :destroy]
+  #before_action :check_admin, only: [:edit, :update]
 
   # GET /ordered_items
   # GET /ordered_items.json
@@ -51,6 +51,7 @@ class OrderedItemsController < ApplicationController
   # PATCH/PUT /ordered_items/1
   # PATCH/PUT /ordered_items/1.json
   def update
+
     respond_to do |format|
       if @ordered_item.update(ordered_item_params)
         format.html { redirect_to @ordered_item, notice: 'Ordered item was successfully updated.' }
@@ -65,6 +66,20 @@ class OrderedItemsController < ApplicationController
   # DELETE /ordered_items/1
   # DELETE /ordered_items/1.json
   def destroy
+
+    #check_order_owner?(@ordered_item)
+    unless @ordered_item.customer == current_customer # it works :-)
+      redirect_to(root_url) and return
+    end
+
+    unless current_customer.admin?
+      if !@ordered_item.is_dispatched?
+        @ordered_item.destroy
+      else
+        redirect_to ordered_items_url, notice: 'There is a reason why there is no button for doing this.'
+        return
+      end
+    end
     @ordered_item.destroy
     respond_to do |format|
       format.html { redirect_to ordered_items_url, notice: 'Ordered item was successfully destroyed.' }
@@ -88,6 +103,12 @@ class OrderedItemsController < ApplicationController
     def check_admin
       unless current_customer.admin?
         redirect_to(root_url)
+      end
+    end
+
+    def check_order_owner?(ordered_item)
+      unless ordered_item.customer == current_customer
+        redirect_to(root_url) and return
       end
     end
 end

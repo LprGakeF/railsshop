@@ -52,7 +52,7 @@
 
 
         <td>
-          <% unless current_customer.try(:admin?) %>
+
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       edit_ordered_item_path(ordered_item), :class => 'btn btn-default btn-xs' %>
           <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
@@ -62,7 +62,7 @@
                       :class => 'btn btn-xs btn-danger' %>
         </td>
       </tr>
-      <% end %>
+    
     <% end %>
   </tbody>
 </table>
