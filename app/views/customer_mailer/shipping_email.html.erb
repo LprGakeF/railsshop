@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Thank you for your order, <%= @customer.surname %>!</h1>
+    <p>
+      You have successfully purchased
+      <%= pluralize(@ordered_item.quantity, @ordered_item.item.quantity_unit) %> of
+      <%= @ordered_item.item.name.pluralize(@ordered_item.quantity) %>!
+
+      If you made this order by a mistake, you should
+      be able to cancel it at your order-overview <%= link_to 'here', ordered_items_url %>.
+    </p>
+    <p>
+      At the overview you can always check the status of your orders too!
+    </p>
+    <p>
+      Of course you wouldn't be able to cancel your order, if the item has already been shiped!
+    </p>
+
+    <p>
+      Please do not hesitate to contact railsshoptest@gmail.com if you have any further questions.
+    </p>
+    <p>Yours sincerely
+    RailsShop</p>
+  </body>
+</html>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150906184907) do
+ActiveRecord::Schema.define(version: 20150906231205) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name"
@@ -75,13 +75,15 @@ ActiveRecord::Schema.define(version: 20150906184907) do
     t.integer  "quantity"
     t.integer  "item_id"
     t.integer  "customer_id"
-    t.boolean  "is_in_process", default: false
-    t.boolean  "is_dispatched", default: false
-    t.boolean  "is_delivered",  default: false
-    t.boolean  "is_rejected",   default: false
-    t.datetime "created_at",                    null: false
-    t.datetime "updated_at",                    null: false
-    t.boolean  "paid",          default: false
+    t.boolean  "is_in_process",      default: false
+    t.boolean  "is_dispatched",      default: false
+    t.boolean  "is_delivered",       default: false
+    t.boolean  "is_rejected",        default: false
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
+    t.boolean  "paid",               default: false
+    t.boolean  "shipping_mail_sent", default: false
+    t.boolean  "payment_mail_sent",  default: false
   end
 
   add_index "ordered_items", ["customer_id"], name: "index_ordered_items_on_customer_id"
