@@ -27,7 +27,13 @@ class CategoriesController < ApplicationController
   # POST /categories
   # POST /categories.json
   def create
+
     @category = Category.new(category_params)
+
+    unless Category.where(:name => @category.name).blank?
+      flash[:notice] = 'This category already exists!'
+      redirect_to(categories_url) and return
+    end
 
     respond_to do |format|
       if @category.save
@@ -73,6 +79,10 @@ class CategoriesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def category_params
       params.require(:category).permit(:name)
+    end
+
+    def cat_exists(category_name)
+      for_each
     end
 
     def check_admin

@@ -1,7 +1,10 @@
 class CustomersController < ApplicationController
   before_action :set_customer, only: [:show, :edit, :update, :destroy]
-  
   before_action :authenticate_customer!
+  before_action :check_admin
+  before_action :authorized, :only => [:new, :destroy]
+
+
   # GET /customers
   # GET /customers.json
 
@@ -95,6 +98,20 @@ class CustomersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def customer_params
-      params.require(:customer).permit(:surname, :forename, :email, :date_of_birth)
+      params.require(:customer).permit(:surname, :forename, :email, :date_of_birth, :street, :house_number, :postcode, :country)
     end
+
+    def check_admin
+      unless current_customer.try(:admin?)
+        # auch kein Flash, weil wozu..
+        redirect_to(root_url)
+      end
+    end
+
+    def authorized
+        flash[:error] = 'You are not allowed creating or deliting new customers!'
+        redirect_to(customers_url)
+    end
+
+
 end

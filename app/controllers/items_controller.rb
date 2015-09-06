@@ -89,7 +89,8 @@ class ItemsController < ApplicationController
 
     def check_admin
       unless current_customer.try(:admin?)
-        redirect_to(root_url)
+        flash[:notice] = 'You are not allowed to do this!'
+        redirect_to(items_url)
       end
     end
 

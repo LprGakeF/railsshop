@@ -6,8 +6,11 @@
   <body>
     <h1>Thank you for your order, <%= @customer.surname %>!</h1>
     <p>
-      You have successfully purchased <%= @ordered_item.quantity %> <%= @ordered_item.item.quantity_unit %>
-      of <%= @ordered_item.item.name %>! If you made this order by a mistake, you should
+      You have successfully purchased
+      <%= pluralize(@ordered_item.quantity, @ordered_item.item.quantity_unit) %> of
+      <%= @ordered_item.item.name.pluralize(@ordered_item.quantity) %>!
+
+      If you made this order by a mistake, you should
       be able to cancel it at your order-overview <%= link_to 'here', ordered_items_url %>.
     </p>
     <p>

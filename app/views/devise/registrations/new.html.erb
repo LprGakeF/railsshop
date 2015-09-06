@@ -36,6 +36,30 @@
     <%= f.password_field :password_confirmation, autocomplete: "off" %>
   </div>
 
+  <hr />
+
+  <div class="field">
+    <%= f.label :street %><br />
+    <%= f.text_field :street, autofocus: false %>
+  </div>
+
+  <div class="field">
+    <%= f.label :house_number %><br />
+    <%= f.text_field :house_number, autofocus: false %>
+  </div>
+
+  <div class="field">
+    <%= f.label :postcode %><br />
+    <%= f.text_field :postcode, autofocus: false %>
+  </div>
+
+  <div class="field">
+    <%= f.label :country %><br />
+    <%= f.text_field :country, autofocus: false %>
+  </div>
+
+  <hr />
+
   <div class="actions">
     <%= f.submit "Sign up" %>
   </div>

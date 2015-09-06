@@ -11,19 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150830220629) do
-
-  create_table "addresses", force: :cascade do |t|
-    t.string   "street"
-    t.integer  "house_number"
-    t.string   "postcode"
-    t.string   "country"
-    t.integer  "customer_id"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
-  end
-
-  add_index "addresses", ["customer_id"], name: "index_addresses_on_customer_id"
+ActiveRecord::Schema.define(version: 20150906184907) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name"
@@ -60,6 +48,10 @@ ActiveRecord::Schema.define(version: 20150830220629) do
     t.datetime "confirmation_sent_at"
     t.string   "unconfirmed_email"
     t.boolean  "admin",                  default: false
+    t.string   "street"
+    t.string   "house_number"
+    t.string   "postcode"
+    t.string   "country"
   end
 
   add_index "customers", ["email"], name: "index_customers_on_email", unique: true
@@ -89,7 +81,7 @@ ActiveRecord::Schema.define(version: 20150830220629) do
     t.boolean  "is_rejected",   default: false
     t.datetime "created_at",                    null: false
     t.datetime "updated_at",                    null: false
-    t.boolean  "paid"
+    t.boolean  "paid",          default: false
   end
 
   add_index "ordered_items", ["customer_id"], name: "index_ordered_items_on_customer_id"

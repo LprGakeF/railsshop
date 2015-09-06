@@ -1,7 +1,7 @@
 class OrderedItemsController < ApplicationController
   before_action :set_ordered_item, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_customer!
-  before_action :check_admin, only: [:edit, :update]
+  before_action :check_admin, only: [:new, :create, :destroy]
 
   # GET /ordered_items
   # GET /ordered_items.json
@@ -101,10 +101,17 @@ class OrderedItemsController < ApplicationController
       #params.require(:ordered_item).permit(:quantity, :item_id)
     end
 
-    def check_admin
+    def check_not_admin
       unless current_customer.admin?
-        flash[:notice] = 'You cannot change your order. If the item is still not shipped, you can cancel your request!'
+        flash[:notice] = 'You cannot change your order. If the item is still not shipped, you can delete your order!'
         redirect_to(ordered_items_url) and return
+      end
+    end
+
+    def check_admin
+      if current_customer.admin?
+        flash[:notice] = 'You are not allowed to placing any orders!'
+        redirect_to(items_url)
       end
     end
 

@@ -12,6 +12,14 @@
   <dd><%= @customer.email %></dd>
   <dt><strong><%= model_class.human_attribute_name(:date_of_birth) %>:</strong></dt>
   <dd><%= @customer.date_of_birth %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:street) %>:</strong></dt>
+  <dd><%= @customer.street %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:house_number) %>:</strong></dt>
+  <dd><%= @customer.house_number %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:postcode) %>:</strong></dt>
+  <dd><%= @customer.postcode %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:country) %>:</strong></dt>
+  <dd><%= @customer.country %></dd>
 </dl>
 
 <%= link_to t('.back', :default => t("helpers.links.back")),

@@ -15,8 +15,18 @@
     </div>
   <% end %>
 
-  <!-- ATT -->
-  <%= f.file_field :photo %>
+
+
+
+
+  <div class="control-group">
+    <%= f.label :photo, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.file_field :photo %>
+    </div>
+    <%= error_span(@item[:photo]) %>
+  </div>
+
 
   <div class="control-group">
     <%= f.label :name, :class => 'control-label' %>
@@ -39,34 +49,8 @@
     </div>
     <%= error_span(@item[:quantity_unit]) %>
   </div>
-  <div class="control-group">
-    <%= f.label :photo_file_name, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :photo_file_name, :class => 'form-control' %>
-    </div>
-    <%= error_span(@item[:photo_file_name]) %>
-  </div>
-  <div class="control-group">
-    <%= f.label :photo_content_type, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :photo_content_type, :class => 'form-control' %>
-    </div>
-    <%= error_span(@item[:photo_content_type]) %>
-  </div>
-  <div class="control-group">
-    <%= f.label :photo_file_size, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :photo_file_size, :class => 'form-control' %>
-    </div>
-    <%= error_span(@item[:photo_file_size]) %>
-  </div>
-  <div class="control-group">
-    <%= f.label :photo_updated_at, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :photo_updated_at, :class => 'form-control' %>
-    </div>
-    <%= error_span(@item[:photo_updated_at]) %>
-  </div>
+
+
   <div class="control-group">
     <%= f.label :price, :class => 'control-label' %>
     <div class="controls">

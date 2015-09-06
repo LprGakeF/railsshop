@@ -67,6 +67,8 @@
   </tbody>
 </table>
 
+<% unless current_customer.try(:admin?) %>
 <%= link_to t('.new', :default => t("helpers.links.new")),
             new_ordered_item_path,
             :class => 'btn btn-primary' %>
+<% end %>

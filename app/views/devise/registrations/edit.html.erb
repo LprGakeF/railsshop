@@ -13,6 +13,21 @@
   <% end %>
 
   <div class="field">
+    <%= f.label :forename %><br />
+    <%= f.text_field :forename, autofocus: true %>
+  </div>
+
+  <div class="field">
+    <%= f.label :surname %><br />
+    <%= f.text_field :surname, autofocus: false %>
+  </div>
+
+  <div class="field">
+    <%= f.label :date_of_birth %><br />
+    <%= f.date_field :date_of_birth, autofocus: false %>
+  </div>
+
+  <div class="field">
     <%= f.label :email %><br />
     <%= f.email_field :email, autofocus: true %>
   </div>
@@ -35,6 +50,30 @@
     <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
     <%= f.password_field :current_password, autocomplete: "off" %>
   </div>
+
+  <hr />
+
+  <div class="field">
+    <%= f.label :street %><br />
+    <%= f.text_field :street, autofocus: false %>
+  </div>
+
+  <div class="field">
+    <%= f.label :house_number %><br />
+    <%= f.text_field :house_number, autofocus: false %>
+  </div>
+
+  <div class="field">
+    <%= f.label :postcode %><br />
+    <%= f.text_field :postcode, autofocus: false %>
+  </div>
+
+  <div class="field">
+    <%= f.label :country %><br />
+    <%= f.text_field :country, autofocus: false %>
+  </div>
+
+  <hr />
 
   <div class="actions">
     <%= f.submit "Update" %>

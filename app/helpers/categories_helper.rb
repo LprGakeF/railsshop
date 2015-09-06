@@ -16,5 +16,4 @@ module CategoriesHelper
       return false
     end
   end
-
 end
