@@ -30,62 +30,57 @@ class OrderedItemsController < ApplicationController
   # POST /ordered_items
   # POST /ordered_items.json
   def create
-    #@ordered_item = OrderedItem.new(ordered_item_params)
-    params = ordered_item_params
-    params[:customer_id] = current_customer.id
-    #@ordered_item = OrderedItem.new(ordered_item_params)
-    @ordered_item = OrderedItem.new(params)
 
-    respond_to do |format|
-      if @ordered_item.save
-        CustomerMailer.order_confirmation_email(current_customer, @ordered_item).deliver
-        format.html { redirect_to root_url, notice: 'Ordered item was successfully created.' }
-        format.json { render :show, status: :created, location: @ordered_item }
-      else
-        format.html { render :new }
-        format.json { render json: @ordered_item.errors, status: :unprocessable_entity }
-      end
+    if (current_customer.try(:admin?))
+      current_params = ordered_item_params
+    else
+      current_params = ordered_item_params_restricted_for_customer
+    end
+
+    current_params[:customer_id] = current_customer.id
+    @ordered_item = OrderedItem.new(current_params)
+
+    if @ordered_item.save
+      CustomerMailer.order_confirmation_email(current_customer, @ordered_item).deliver
+      redirect_to root_url, notice: 'Ordered item was successfully created.'
+    else
+      render :new
     end
   end
 
-  # PATCH/PUT /ordered_items/1
-  # PATCH/PUT /ordered_items/1.json
   def update
 
-    respond_to do |format|
-      if @ordered_item.update(ordered_item_params)
-        format.html { redirect_to @ordered_item, notice: 'Ordered item was successfully updated.' }
-        format.json { render :show, status: :ok, location: @ordered_item }
-      else
-        format.html { render :edit }
-        format.json { render json: @ordered_item.errors, status: :unprocessable_entity }
-      end
+    if (current_customer.try(:admin?))
+      current_params = ordered_item_params
+    else
+      current_params = ordered_item_params_restricted_for_customer
+    end
+    if @ordered_item.update(current_params)
+      redirect_to @ordered_item, notice: 'Ordered item was successfully updated.'
+    else
+      render :edit
     end
   end
 
-  # DELETE /ordered_items/1
-  # DELETE /ordered_items/1.json
   def destroy
 
-    #check_order_owner?(@ordered_item)
-    unless @ordered_item.customer == current_customer # it works :-)
-      flash[:notice] = 'This order does not exist!'
+    unless @ordered_item.customer == current_customer
+      flash[:error] = 'This order does not exist!'
       redirect_to(root_url) and return
     end
 
-    unless current_customer.admin?
+    unless current_customer.try(:admin?)
       if !@ordered_item.is_dispatched?
         @ordered_item.destroy
+        redirect_to ordered_items_url, notice: 'Ordered item was successfully destroyed.'
       else
-        redirect_to ordered_items_url, notice: 'You can\'t delete your order if it has already been shipped!'
-        return
+        redirect_to ordered_items_url, error: 'You can\'t delete your order if it has already been shipped!' and return
+        #return
       end
     end
+
     @ordered_item.destroy
-    respond_to do |format|
-      format.html { redirect_to ordered_items_url, notice: 'Ordered item was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to ordered_items_url, notice: 'Ordered item was successfully destroyed.'
   end
 
   private
@@ -101,16 +96,20 @@ class OrderedItemsController < ApplicationController
       #params.require(:ordered_item).permit(:quantity, :item_id)
     end
 
+    def ordered_item_params_restricted_for_customer
+      params.require(:ordered_item).permit(:quantity, :item_id)
+    end
+
     def check_not_admin
-      unless current_customer.admin?
+      unless current_customer.try(:admin?)
         flash[:notice] = 'You cannot change your order. If the item is still not shipped, you can delete your order!'
         redirect_to(ordered_items_url) and return
       end
     end
 
     def check_admin
-      if current_customer.admin?
-        flash[:notice] = 'You are not allowed to placing any orders!'
+      if current_customer.try(:admin?)
+        flash[:notice] = 'You are not allowed to placing or deleting any orders!'
         redirect_to(items_url)
       end
     end

@@ -1,6 +1,5 @@
 class ItemsController < ApplicationController
   before_action :set_item, only: [:show, :edit, :update, :destroy]
-
   before_action :check_admin, only: [:new, :edit, :create, :update, :destroy]
 
 
@@ -70,9 +69,8 @@ class ItemsController < ApplicationController
   # DELETE /items/1.json
   def destroy
     @item.destroy
-    respond_to do |format|
-      format.html { redirect_to items_url, notice: 'Item was successfully destroyed.' }
-      format.json { head :no_content }
+      redirect_to items_url, notice: 'Item was successfully destroyed.'
+      head :no_content
     end
   end
 
@@ -93,10 +91,3 @@ class ItemsController < ApplicationController
         redirect_to(items_url)
       end
     end
-
-    #def check_signed_in
-    #  unless customer_signed_in?
-    #    redirect_to(root_url)
-    #  end
-    #end
-end
