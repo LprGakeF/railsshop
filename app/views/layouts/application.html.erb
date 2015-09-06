@@ -35,21 +35,12 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <!--<li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>-->
-        <% if customer_signed_in? %>
-          <!--<li>Signed in as <%= current_customer.email %>. Not you? -->
-          <li>  <%= link_to current_customer.forename, destroy_customer_session_path, :method => :delete %></li>
-        <% else %>
-          <li><%= link_to "Sign up", new_customer_registration_path %></li>
-          <li><%= link_to "Sign in", new_customer_session_path %></li>
-        <% end %>
 
-        <% if customer_signed_in? %>
-          <% if current_customer.admin? %>
-            <%= render 'layouts/admin' %>
-          <% else %>
-            <%= render 'layouts/customer' %>
-          <% end %>
-        <% end %>
+        <li><%= link_to "Categorymanagement", categories_path %></li>
+        <li><%= link_to "Orderes", ordered_items_path %></li>
+        <li><%= link_to "Addresses", addresses_path %></li>
+        <li><%= link_to "Customers", customers_path %></li>
+
 
         <li><%= link_to "Items", items_path %></li>
 
@@ -69,25 +60,33 @@
 
       </ul>
 
-      <form class="navbar-form navbar-right" role="search">
-        <div class="form-group">
-          <input type="text" class="form-control" placeholder="Search">
-        </div>
-        <button type="submit" class="btn btn-default">Submit</button>
-      </form>
-      <!--<ul class="nav navbar-nav navbar-right">
-        <li><a href="#">Link</a></li>
+
+      <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
+          <% if customer_signed_in? %>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+          aria-expanded="false"><%=current_customer.forename%><span class="caret"></span></a>
+          <% else %>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+          aria-expanded="false">User<span class="caret"></span></a>
+          <% end %>
           <ul class="dropdown-menu" role="menu">
             <li><a href="#">Action</a></li>
             <li><a href="#">Another action</a></li>
-            <li><a href="#">Something else here</a></li>
+
+            <% if customer_signed_in? %>
             <li class="divider"></li>
-            <li><a href="#">Separated link</a></li>
+              <!--<li>Signed in as <%= current_customer.email %>. Not you? -->
+              <% str = "Not " + current_customer.forename + " -> sign out!" %>
+              <li><%= link_to str, destroy_customer_session_path, :method => :delete %></li>
+            <% else %>
+              <li><%= link_to "Sign up", new_customer_registration_path %></li>
+              <li><%= link_to "Sign in", new_customer_session_path %></li>
+            <% end %>
           </ul>
         </li>
-      </ul>-->
+      </ul>
+
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>

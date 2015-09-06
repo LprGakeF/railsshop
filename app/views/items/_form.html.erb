@@ -82,6 +82,18 @@
     <%= error_span(@item[:currency]) %>
   </div>
 
+  <h2>Categories</h2>
+  <% for category in Category.all %>
+  <!--todo hidden field workafor unselect all possible-->
+    <div>
+      <%= hidden_field_tag("item[category_ids][]", nil) %>
+      <%= check_box_tag "item[category_ids][]",
+      category.id,
+      @item.categories.include?(category) %>
+
+      <%= category.name %>
+    </div>
+  <% end %>
 
   <%= f.submit nil, :class => 'btn btn-primary' %>
   <%= link_to t('.cancel', :default => t("helpers.links.cancel")),

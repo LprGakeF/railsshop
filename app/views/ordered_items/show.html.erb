@@ -10,11 +10,20 @@
   <dd><%= @ordered_item.item_id %></dd>
   <dt><strong><%= model_class.human_attribute_name(:customer_id) %>:</strong></dt>
   <dd><%= @ordered_item.customer_id %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:is_in_process) %>:</strong></dt>
+  <dd><%= @ordered_item.is_in_process %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:is_dispatched) %>:</strong></dt>
+  <dd><%= @ordered_item.is_dispatched %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:is_delivered) %>:</strong></dt>
+  <dd><%= @ordered_item.is_delivered %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:is_rejected) %>:</strong></dt>
+  <dd><%= @ordered_item.is_rejected %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:paid) %>:</strong></dt>
+  <dd><%= @ordered_item.paid %></dd>
 </dl>
 
 <%= link_to t('.back', :default => t("helpers.links.back")),
               ordered_items_path, :class => 'btn btn-default'  %>
-<% if current_customer.try(:admin?) %>
 <%= link_to t('.edit', :default => t("helpers.links.edit")),
               edit_ordered_item_path(@ordered_item), :class => 'btn btn-default' %>
 <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
@@ -22,4 +31,3 @@
               :method => 'delete',
               :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
               :class => 'btn btn-danger' %>
-<% end %>

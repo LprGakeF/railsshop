@@ -1,36 +1,33 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>ID:</strong>
-  <%= @item.id %>
-</p>
-
-<p>
   <strong>Name:</strong>
   <%= @item.name %>
 </p>
-
 <p>
   <strong>Description:</strong>
   <%= @item.description %>
 </p>
-
 <p>
   <strong>Quantity Unit:</strong>
   <%= @item.quantity_unit %>
 </p>
 
+<p>
+  <% cat_str = "" %>
+  <% for category in Category.all %>
+      <% if category.items.exists? %>
+        <% cat_str = cat_str + category.name + ", " %>
+        <% category.name %>
+      <% end %>
+  <% end %>
+  <% if cat_str != "" %>
+    <strong>In Categories:</strong>
+    <%= cat_str.chop.chop %>
+  <% end %>
+</p>
+
 <%= image_tag @item.photo.url(:medium) %>
-
-<h2>Categories:</h2>
-<% for category in Category.all %>
-  <div>
-    <% if @item.categories.include?(category) %>
-      <strong><%= category.name %></strong>
-    <% end %>
-  </div>
-<% end %>
-
 
 <%= form_for @ordered_item = OrderedItem.new, :html => { :class => "form-horizontal ordered_item" } do |f| %>
 
@@ -59,24 +56,11 @@
 
   <%= f.hidden_field :item_id, :value => @item.id %>
 
-  <h2>Categories:</h2>
-  <% for category in Category.all %>
-    <div>
-      <% if category.items.exists? %>
-        <strong><%= category.name %></strong>
-      <% end %>
-    </div>
-  <% end %>
-
-
-
   <%= f.submit "Purchase", :class => 'btn btn-primary' %>
   <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
             ordered_items_path, :class => 'btn btn-default' %>
 
 <% end %>
-
-
 
 <%= link_to 'Edit', edit_item_path(@item) %> |
 <%= link_to 'Back', items_path %>

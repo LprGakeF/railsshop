@@ -1,7 +1,7 @@
 class OrderedItemsController < ApplicationController
   before_action :set_ordered_item, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_customer!
-  #before_action :check_admin, only: [:edit, :update]
+  before_action :check_admin, only: [:edit, :update]
 
   # GET /ordered_items
   # GET /ordered_items.json
@@ -69,6 +69,7 @@ class OrderedItemsController < ApplicationController
 
     #check_order_owner?(@ordered_item)
     unless @ordered_item.customer == current_customer # it works :-)
+      flash[:notice] = 'This order does not exist!'
       redirect_to(root_url) and return
     end
 
@@ -76,7 +77,7 @@ class OrderedItemsController < ApplicationController
       if !@ordered_item.is_dispatched?
         @ordered_item.destroy
       else
-        redirect_to ordered_items_url, notice: 'There is a reason why there is no button for doing this.'
+        redirect_to ordered_items_url, notice: 'You can\'t delete your order if it has already been shipped!'
         return
       end
     end
@@ -95,20 +96,21 @@ class OrderedItemsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def ordered_item_params
-      params.require(:ordered_item).permit(:quantity, :item_id, :customer_id)
+      params.require(:ordered_item).permit(:quantity, :item_id, :customer_id,
+      :is_in_process, :is_dispatched, :is_delivered, :is_rejected, :paid)
       #params.require(:ordered_item).permit(:quantity, :item_id)
-
     end
 
     def check_admin
       unless current_customer.admin?
-        redirect_to(root_url)
+        flash[:notice] = 'You cannot change your order. If the item is still not shipped, you can cancel your request!'
+        redirect_to(ordered_items_url) and return
       end
     end
 
     def check_order_owner?(ordered_item)
       unless ordered_item.customer == current_customer
-        redirect_to(root_url) and return
+        redirect_to(ordered_items_url) and return
       end
     end
 end

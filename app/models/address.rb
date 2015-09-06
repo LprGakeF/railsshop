@@ -3,6 +3,6 @@ class Address < ActiveRecord::Base
 
   validates :street, length: { in: 2..32 }
   validates :house_number, length: { in: 2..8 }
-  validates :post_code, length: { in: 2..16 }
+  validates :postcode, length: { in: 2..16 }
   validates :country, length: { in: 2..32 }
 end

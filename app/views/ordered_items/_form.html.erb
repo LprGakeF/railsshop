@@ -14,15 +14,20 @@
       </div>
     </div>
   <% end %>
+  <!--<div class="row">
+  <div class="col-md-3">-->
 
   <div class="control-group">
     <%= f.label :quantity, :class => 'control-label' %>
     <div class="controls">
-      <%= f.text_field :quantity, :class => 'form-control' %>
+      <%= f.number_field :quantity, :class => 'form-control' %>
     </div>
     <%= error_span(@ordered_item[:quantity]) %>
   </div>
-  <!--
+
+<!--</div>
+</div>-->
+
   <div class="control-group">
     <%= f.label :item_id, :class => 'control-label' %>
     <div class="controls">
@@ -34,34 +39,55 @@
     <%= f.label :customer_id, :class => 'control-label' %>
     <div class="controls">
       <%= f.text_field :customer_id, :class => 'form-control' %>
-    </div>-->
-    <%= f.hidden_field :item_id %>
-    <!--<%= error_span(@ordered_item[:customer_id]) %>-->
-
-
-
-  <!--<h2>Categories:</h2>
-  <% for category in Category.all %>
-    <div>
-      <% if category.items.exists? %>
-        <strong><%= category.name %></strong>
-      <% end %>
     </div>
-  <% end %>
+    <%= error_span(@ordered_item[:customer_id]) %>
+  </div>
 
-  <h2>Items:</h2>
-  <% for item in Item.all %>
-    <div>
+  <div class="row">
 
-        <strong><%= item.name %></strong>
-
+  <div class="col-md-2">
+    <%= f.label :is_in_process, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.check_box :is_in_process, :class => 'checkbox' %>
     </div>
-  <% end %>-->
+    <%= error_span(@ordered_item[:is_in_process]) %>
+  </div>
 
+  <div class="col-md-2">
+    <%= f.label :is_dispatched, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.check_box :is_dispatched, :class => 'checkbox' %>
+    </div>
+    <%= error_span(@ordered_item[:is_dispatched]) %>
+  </div>
 
+  <div class="col-md-2">
+    <%= f.label :is_delivered, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.check_box :is_delivered, :class => 'checkbox' %>
+    </div>
+    <%= error_span(@ordered_item[:is_delivered]) %>
+  </div>
 
-  <%= f.submit 'Purchase', :class => 'btn btn-primary' %>
+  <div class="col-md-2">
+    <%= f.label :is_rejected, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.check_box :is_rejected, :class => 'checkbox' %>
+    </div>
+    <%= error_span(@ordered_item[:is_rejected]) %>
+  </div>
+
+  <div class="col-md-2">
+    <%= f.label :paid, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.check_box :paid, :class => 'checkbox' %>
+    </div>
+    <%= error_span(@ordered_item[:paid]) %>
+  </div>
+</div>
+
+  <%= f.submit nil, :class => 'btn btn-primary' %>
   <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
             ordered_items_path, :class => 'btn btn-default' %>
-          </div>
+
 <% end %>
