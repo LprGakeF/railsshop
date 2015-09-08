@@ -1,0 +1,12 @@
+---
+applications:
+- name: railsshop
+  memory: 512M
+  instances: 1
+  host: railsshop
+  domain: de.a9sapp.eu
+  path: .
+  services:
+  - postgresql-appname
+  env:
+    RAILS_ENV: production
