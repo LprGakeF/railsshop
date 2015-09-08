@@ -5,6 +5,9 @@ class Customer < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :timeoutable, :validatable
   has_many :ordered_items, dependent: :restrict_with_exception
 
+  has_one :address, :dependent => :destroy
+  accepts_nested_attributes_for :address
+
   validates :forename, length: { in: 2..32 }
   validates :surname, length: { in: 2..32 }
 

@@ -1,68 +1,95 @@
-<h2>Sign up</h2>
+<% resource.build_address if resource.address.nil? %>
+<%= form_for(resource, :as => resource_name,
+                       :url => registration_path(resource_name)) do |f| %>
+  <ul>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= devise_error_messages! %>
+    <%= devise_error_messages! %>
 
-  <div class="field">
-    <%= f.label :forename %><br />
-    <%= f.text_field :forename, autofocus: true %>
-  </div>
+    <div class="field">
+      <%= f.label :forename %><br />
+      <%= f.text_field :forename, autofocus: true %>
+    </div>
 
-  <div class="field">
-    <%= f.label :surname %><br />
-    <%= f.text_field :surname, autofocus: false %>
-  </div>
+    <div class="field">
+      <%= f.label :surname %><br />
+      <%= f.text_field :surname, autofocus: false %>
+    </div>
 
-  <div class="field">
-    <%= f.label :date_of_birth %><br />
-    <%= f.date_field :date_of_birth, autofocus: false %>
-  </div>
+    <div class="field">
+      <%= f.label :date_of_birth %><br />
+      <%= f.date_field :date_of_birth, autofocus: false %>
+    </div>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: false %>
-  </div>
+    <div class="field">
+      <%= f.label :email %><br />
+      <%= f.email_field :email, autofocus: false %>
+    </div>
 
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "off" %>
-  </div>
+    <div class="field">
+      <%= f.label :password %>
+      <% if @minimum_password_length %>
+      <em>(<%= @minimum_password_length %> characters minimum)</em>
+      <% end %><br />
+      <%= f.password_field :password, autocomplete: "off" %>
+    </div>
 
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off" %>
-  </div>
+    <div class="field">
+      <%= f.label :password_confirmation %><br />
+      <%= f.password_field :password_confirmation, autocomplete: "off" %>
+    </div>
 
-  <hr />
+    <hr />
 
-  <div class="field">
-    <%= f.label :street %><br />
-    <%= f.text_field :street, autofocus: false %>
-  </div>
+    <div class="field">
+      <%= f.label :street %><br />
+      <%= f.text_field :street, autofocus: false %>
+    </div>
 
-  <div class="field">
-    <%= f.label :house_number %><br />
-    <%= f.text_field :house_number, autofocus: false %>
-  </div>
+    <div class="field">
+      <%= f.label :house_number %><br />
+      <%= f.text_field :house_number, autofocus: false %>
+    </div>
 
-  <div class="field">
-    <%= f.label :postcode %><br />
-    <%= f.text_field :postcode, autofocus: false %>
-  </div>
+    <div class="field">
+      <%= f.label :postcode %><br />
+      <%= f.text_field :postcode, autofocus: false %>
+    </div>
 
-  <div class="field">
-    <%= f.label :country %><br />
-    <%= f.text_field :country, autofocus: false %>
-  </div>
+    <div class="field">
+      <%= f.label :country %><br />
+      <%= f.text_field :country, autofocus: false %>
+    </div>
 
-  <hr />
+    <h2>Addressassasss</h2>
 
-  <div class="actions">
-    <%= f.submit "Sign up" %>
-  </div>
-<% end %>
 
-<%= render "devise/shared/links" %>
+    <%= f.fields_for :address do |a| %>
+
+      <div class="field">
+        <%= a.label :street %><br>
+        <%= a.text_field :street %>
+      </div>
+      <div class="field">
+        <%= a.label :house_number %><br>
+        <%= a.text_field :house_number %>
+      </div>
+      <div class="field">
+        <%= a.label :postcode %><br>
+        <%= a.text_field :postcode %>
+      </div>
+      <div class="field">
+        <%= a.label :country %><br>
+        <%= a.text_field :country %>
+      </div>
+      <hr />
+    <% end %>
+
+
+      <hr />
+
+      <div class="actions">
+        <%= f.submit "Sign up" %>
+      </div>
+    <% end %>
+
+    <%= render "devise/shared/links" %>

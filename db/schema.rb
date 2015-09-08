@@ -11,10 +11,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150906231205) do
+ActiveRecord::Schema.define(version: 20150908211342) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "addresses", force: :cascade do |t|
+    t.string   "street"
+    t.string   "house_number"
+    t.string   "postcode"
+    t.string   "country"
+    t.integer  "customer_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  add_index "addresses", ["customer_id"], name: "index_addresses_on_customer_id", using: :btree
 
   create_table "categories", force: :cascade do |t|
     t.string   "name"
@@ -92,6 +104,7 @@ ActiveRecord::Schema.define(version: 20150906231205) do
   add_index "ordered_items", ["customer_id"], name: "index_ordered_items_on_customer_id", using: :btree
   add_index "ordered_items", ["item_id"], name: "index_ordered_items_on_item_id", using: :btree
 
+  add_foreign_key "addresses", "customers"
   add_foreign_key "ordered_items", "customers"
   add_foreign_key "ordered_items", "items"
 end

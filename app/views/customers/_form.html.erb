@@ -76,6 +76,29 @@
     <%= error_span(@customer[:country]) %>
   </div>
 
+  <h2>Addressassasss</h2>
+
+  <%= f.fields_for :address do |a| %>
+
+    <div class="field">
+      <%= a.label :street %><br>
+      <%= a.text_field :street %>
+    </div>
+    <div class="field">
+      <%= a.label :house_number %><br>
+      <%= a.text_field :house_number %>
+    </div>
+    <div class="field">
+      <%= a.label :postcode %><br>
+      <%= a.text_field :postcode %>
+    </div>
+    <div class="field">
+      <%= a.label :country %><br>
+      <%= a.text_field :country %>
+    </div>
+    <hr />
+  <% end %>
+
   <%= f.submit nil, :class => 'btn btn-primary' %>
   <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
             customers_path, :class => 'btn btn-default' %>

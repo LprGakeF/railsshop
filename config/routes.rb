@@ -4,7 +4,9 @@ Rails.application.routes.draw do
   devise_for :customers
   resources :ordered_items
 
-  resources :customers
+  resources :customers do
+    resource :address
+  end
 
   resources :items
 

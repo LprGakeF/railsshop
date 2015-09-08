@@ -1,8 +1,9 @@
 class CustomersController < ApplicationController
+
   before_action :set_customer, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_customer!
-  before_action :check_admin
-  before_action :authorized, :only => [:new, :destroy]
+  #before_action :authenticate_customer!
+  #before_action :check_admin
+  #before_action :authorized, :only => [:new, :destroy]
 
 
   # GET /customers
@@ -44,6 +45,9 @@ class CustomersController < ApplicationController
   # GET /customers/new
   def new
     @customer = Customer.new
+    #@customer.address = Address.new
+    @customer.build_address
+    #@company.build_subscription
   end
 
   # GET /customers/1/edit
@@ -98,7 +102,7 @@ class CustomersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def customer_params
-      params.require(:customer).permit(:surname, :forename, :email, :date_of_birth, :street, :house_number, :postcode, :country)
+      params.require(:customer).permit(:surname, :forename, :email, :date_of_birth, :street, :house_number, :postcode, :country, :address_attributes => [:id, :street, :house_number, :postcode, :country], :addresses_attributes => [:id, :street, :house_number, :postcode, :country])
     end
 
     def check_admin
