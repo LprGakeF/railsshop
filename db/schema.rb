@@ -63,10 +63,6 @@ ActiveRecord::Schema.define(version: 20150908211342) do
     t.datetime "confirmation_sent_at"
     t.string   "unconfirmed_email"
     t.boolean  "admin",                  default: false
-    t.string   "street"
-    t.string   "house_number"
-    t.string   "postcode"
-    t.string   "country"
   end
 
   add_index "customers", ["email"], name: "index_customers_on_email", unique: true, using: :btree

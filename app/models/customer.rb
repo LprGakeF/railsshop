@@ -17,8 +17,8 @@ class Customer < ActiveRecord::Base
   validates_date :date_of_birth, :on_or_after => lambda { 150.years.ago },
     :on_or_after_message => "you must not be older least 150"
 
-    validates :street, length: { in: 2..32 }
-    validates :house_number, length: { in: 2..8 }
-    validates :postcode, length: { in: 2..16 }
-    validates :country, length: { in: 2..32 }
+    #validates :street, length: { in: 2..32 }
+    #validates :house_number, length: { in: 2..8 }
+    #validates :postcode, length: { in: 2..16 }
+    #validates :country, length: { in: 2..32 }
 end

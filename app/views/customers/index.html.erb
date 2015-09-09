@@ -23,7 +23,7 @@
         <td><%= customer.surname %></td>
         <td><%= customer.email %></td>
         <td><%= customer.date_of_birth %></td>
-        <td><%= customer.postcode %></td>
+        <td><%= customer.address.postcode %></td>
         <td><%=l customer.created_at %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
