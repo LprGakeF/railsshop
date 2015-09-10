@@ -1,7 +1,14 @@
 <% resource.build_address if resource.address.nil? %>
+
+
 <%= form_for(resource, :as => resource_name,
                        :url => registration_path(resource_name)) do |f| %>
+
+
+
   <ul>
+
+    <h2>Personal Data</h2>
 
     <%= devise_error_messages! %>
 
@@ -40,7 +47,7 @@
 
     <hr />
 
-    <h2>Addressassasss</h2>
+    <h2>Address</h2>
 
     <%= f.fields_for :address do |a| %>
 
@@ -60,13 +67,11 @@
         <%= a.label :country %><br>
         <%= a.text_field :country %>
       </div>
-      
+
     <% end %>
 
-      <hr />
-
       <div class="actions">
-        <%= f.submit "Sign up" %>
+        <%= f.submit "Sign up", :class => 'btn btn-primary' %>
       </div>
     <% end %>
 

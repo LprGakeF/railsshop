@@ -3,6 +3,126 @@
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
   <%= devise_error_messages! %>
 
+
+  <!--<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">-->
+    <div class="panel panel-default">
+      <div class="panel-heading" role="tab" id="headingOne">
+        <h4 class="panel-title">
+          <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+            Personal Details
+          </a>
+        </h4>
+      </div>
+      <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+        <div class="panel-body">
+
+          <div class="field">
+            <%= f.label :forename %><br />
+            <%= f.text_field :forename, autofocus: true %>
+          </div>
+
+          <div class="field">
+            <%= f.label :surname %><br />
+            <%= f.text_field :surname, autofocus: false %>
+          </div>
+
+          <div class="field">
+            <%= f.label :date_of_birth %><br />
+            <%= f.date_field :date_of_birth, autofocus: false %>
+          </div>
+
+          <div class="field">
+            <%= f.label :email %><br />
+            <%= f.email_field :email, autofocus: true %>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="panel panel-default">
+      <div class="panel-heading" role="tab" id="headingTwo">
+        <h4 class="panel-title">
+          <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+            Current Password
+          </a>
+        </h4>
+      </div>
+      <div id="collapseTwo" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingTwo">
+        <div class="panel-body">
+
+          <div class="field">
+            <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
+            <%= f.password_field :current_password, autocomplete: "off" %>
+          </div>
+
+          <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+            <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+          <% end %>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="panel panel-default">
+      <div class="panel-heading" role="tab" id="headingThree">
+        <h4 class="panel-title">
+          <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+            Address
+          </a>
+        </h4>
+      </div>
+      <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+        <div class="panel-body">
+          <%= f.fields_for :address do |a| %>
+
+            <div class="field">
+              <%= a.label :street %><br>
+              <%= a.text_field :street %>
+            </div>
+            <div class="field">
+              <%= a.label :house_number %><br>
+              <%= a.text_field :house_number %>
+            </div>
+            <div class="field">
+              <%= a.label :postcode %><br>
+              <%= a.text_field :postcode %>
+            </div>
+            <div class="field">
+              <%= a.label :country %><br>
+              <%= a.text_field :country %>
+            </div>
+
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel panel-default">
+      <div class="panel-heading" role="tab" id="headingFour">
+        <h4 class="panel-title">
+          <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+            Change Password
+          </a>
+        </h4>
+      </div>
+      <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
+        <div class="panel-body">
+
+          <div class="field">
+            <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
+            <%= f.password_field :password, autocomplete: "off" %>
+          </div>
+          <div class="field">
+            <%= f.label :password_confirmation %><br />
+            <%= f.password_field :password_confirmation, autocomplete: "off" %>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+
   <% flash.each do |key, value| %>
   <div class="message">
      <div class="alert-message <%= key %> fade in">
@@ -12,74 +132,37 @@
   </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :forename %><br />
-    <%= f.text_field :forename, autofocus: true %>
-  </div>
-
-  <div class="field">
-    <%= f.label :surname %><br />
-    <%= f.text_field :surname, autofocus: false %>
-  </div>
-
-  <div class="field">
-    <%= f.label :date_of_birth %><br />
-    <%= f.date_field :date_of_birth, autofocus: false %>
-  </div>
-
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
-  </div>
-
-  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-    <%= f.password_field :password, autocomplete: "off" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-    <%= f.password_field :current_password, autocomplete: "off" %>
-  </div>
-
-  <hr />
-
-  <%= f.fields_for :address do |a| %>
-
-    <div class="field">
-      <%= a.label :street %><br>
-      <%= a.text_field :street %>
-    </div>
-    <div class="field">
-      <%= a.label :house_number %><br>
-      <%= a.text_field :house_number %>
-    </div>
-    <div class="field">
-      <%= a.label :postcode %><br>
-      <%= a.text_field :postcode %>
-    </div>
-    <div class="field">
-      <%= a.label :country %><br>
-      <%= a.text_field :country %>
-    </div>
-
-  <% end %>
   <div class="actions">
-    <%= f.submit "Update" %>
+    <%= f.submit "Update", :class => 'btn btn-primary' %>
   </div>
 <% end %>
 
-<h3>Cancel my account</h3>
+<hr />
 
-<p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
+<div class="panel panel-default">
+  <div class="panel-heading" role="tab" id="headingFive">
+    <h4 class="panel-title">
+      <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+        Account Cancellation
+      </a>
+    </h4>
+  </div>
+  <div id="collapseFive" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFive">
+    <div class="panel-body">
+
+      <p>You can deactivate your account. You will not be able to sign in and purchase items anymore.
+      Already placed orders will be still executed. If there are orders, you do not want to be executed
+      and they have not been shipped yet, please cancel them before deactivate your account.
+      <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, :class => 'btn btn-danger' %></p>
+
+      <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+        <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+      <% end %>
+
+    </div>
+  </div>
+</div>
+
+
 
 <%= link_to "Back", :back %>
