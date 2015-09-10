@@ -18,16 +18,17 @@ class ApplicationController < ActionController::Base
       :email, :password, :password_confirmation,
       #address_attributes: [:street, :house_number, :postcode, :country,])
       address_attributes: [:id, :street, :house_number, :postcode, :country])
-      end
     end
+  #end
 
      #def configure_permitted_parameters
      #devise_parameter_sanitizer.for(:sign_up) << :forname, :surname, :date_of_birth
      #end
 
-     #devise_parameter_sanitizer.for(:account_update) do |u|
-     #  u.permit(:name,
-     #    :email, :password, :password_confirmation, :current_password)
-     #end
-
+     devise_parameter_sanitizer.for(:account_update) do |u|
+       u.permit(:forename, :surename, :date_of_birth,
+         :email, :password, :password_confirmation, :current_password,
+         address_attributes: [:id, :street, :house_number, :postcode, :country])
+     end
+end
 end
