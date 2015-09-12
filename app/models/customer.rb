@@ -8,6 +8,8 @@ class Customer < ActiveRecord::Base
   has_one :address, :dependent => :destroy
   accepts_nested_attributes_for :address
 
+  after_create :do_admin
+
   validates :forename, length: { in: 2..32 }
   validates :surname, length: { in: 2..32 }
 
@@ -16,4 +18,13 @@ class Customer < ActiveRecord::Base
 
   validates_date :date_of_birth, :on_or_after => lambda { 150.years.ago },
     :on_or_after_message => "you must not be older least 150"
+
+  private
+
+  def do_admin
+     if self.email == "railsshoptest@gmail.com"
+       self.update_column(:admin, true)
+     end
+   end
+
 end

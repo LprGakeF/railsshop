@@ -3,7 +3,7 @@ class CustomersController < ApplicationController
   before_action :set_customer, only: [:show, :edit, :update, :destroy]
   #before_action :authenticate_customer!
   #before_action :check_admin
-  #before_action :authorized, :only => [:new, :destroy]
+  #before_action :authorized, :only => [:new, :destroy
 
 
   # GET /customers
@@ -116,6 +116,5 @@ class CustomersController < ApplicationController
         flash[:error] = 'You are not allowed creating or deliting new customers!'
         redirect_to(customers_url)
     end
-
 
 end

@@ -12,7 +12,7 @@ Rails.application.routes.draw do
 
   resources :categories
 
-  devise_for :customers, only: [:new, :create, :edit, :update]
+
 
 
   # The priority is based upon order of creation: first created -> highest priority.
