@@ -23,6 +23,13 @@
     </tr>
   </thead>
   <tbody>
+
+    <% if current_customer.try(:admin?) %>
+      <p>admin</p>
+    <% else %>
+      <p>not admin</p>
+    <%end %>
+
     <% @items.each do |item| %>
       <tr>
 
