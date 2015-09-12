@@ -8,5 +8,6 @@ applications:
   path: .
   services:
   - postgresql-appname
+  - swift-railsshop
   env:
     RAILS_ENV: production

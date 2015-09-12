@@ -9,6 +9,7 @@ source 'https://rubygems.org'
 
 gem 'rails_12factor', group: :production
 gem 'pg', group: :production
+gem 'fog', group: :production
 ##gem 'pg'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
