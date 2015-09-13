@@ -10,7 +10,7 @@
       <th><%= model_class.human_attribute_name(:surname) %></th>
       <th><%= model_class.human_attribute_name(:email) %></th>
       <th><%= model_class.human_attribute_name(:date_of_birth) %></th>
-      <th><%= model_class.human_attribute_name(:postcode) %></th>
+
       <th><%= model_class.human_attribute_name(:created_at) %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
@@ -23,7 +23,7 @@
         <td><%= customer.surname %></td>
         <td><%= customer.email %></td>
         <td><%= customer.date_of_birth %></td>
-        <td><%= customer.address.postcode %></td>
+
         <td><%=l customer.created_at %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),

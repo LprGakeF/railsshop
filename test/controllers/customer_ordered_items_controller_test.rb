@@ -2,6 +2,8 @@ require 'test_helper'
 
 class OrderedItemsControllerTest < ActionController::TestCase
   setup do
+    @controller = ItemsController.new
+
     @ordered_item = ordered_items(:one)
     #@admin = customers(:admin)   so jehts ^^
     #sign_in :customer, @admin

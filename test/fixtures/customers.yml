@@ -1,15 +1,18 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  forename: MyString
-  surname: MyString
-  email: MyString
-  date_of_birth: 1991-06-14
-  #date_of_birth: 2015-06-14
+  forename: one
+  surname: one
+  email: one@gmail.de
+  date_of_birth: 1900-01-0
+  admin: false
+  confirmed_at: 2000-01-01
 
-two:
-  forename: MyString
-  surname: MyString
-  email: MyString
-  date_of_birth: 1991-06-14
-  #date_of_birth: 2015-06-14
+
+admin:
+  forename: admin
+  surname: admin
+  email: admin@gmail.de
+  date_of_birth: 1900-01-0
+  admin: true
+  confirmed_at: 2000-01-01

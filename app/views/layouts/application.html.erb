@@ -44,7 +44,8 @@
         <li><%= link_to "Items", items_path %></li>
 
         <% if has_any_category_any_items? %>
-        <li class="dropdown">
+
+        <li class="dropdown ">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"> Categories <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
 
@@ -60,7 +61,15 @@
       </ul>
 
 
-      <ul class="nav navbar-nav navbar-right">
+      <% if current_customer.try(:admin?) %>
+      <ul class="nav navbar-nav navbar-right label-warning">
+      <% else %>
+        <% if customer_signed_in? %>
+        <ul class="nav navbar-nav navbar-right label-success">
+        <% else %>
+        <ul class="nav navbar-nav navbar-right label-info">
+        <% end %>
+      <% end %>
         <li class="dropdown">
           <% if customer_signed_in? %>
           <% customer_name = current_customer.forename + " " + current_customer.surname %>
@@ -85,6 +94,7 @@
               <li><%= link_to "Sign in", new_customer_session_path %></li>
             <% end %>
           </ul>
+
         </li>
       </ul>
 
@@ -102,8 +112,8 @@
     </div>
   </div>
 
-  <footer class="footer">
-    <div class="container navbar-fixed-bottom">
+  <footer class="footer clearfix">
+    <div class="panel-footer clearfix">
 
       <p class="text-muted text-center">You cannnot actually buy here anything in real - This is just a Testwebsite!</p>
 

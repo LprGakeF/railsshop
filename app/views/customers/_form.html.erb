@@ -44,39 +44,7 @@
     <%= error_span(@customer[:date_of_birth]) %>
   </div>
 
-  <div class="control-group">
-    <%= f.label :street, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :street, :class => 'form-control' %>
-    </div>
-    <%= error_span(@customer[:street]) %>
-  </div>
-
-  <div class="control-group">
-    <%= f.label :house_number, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :house_number, :class => 'form-control' %>
-    </div>
-    <%= error_span(@customer[:house_number]) %>
-  </div>
-
-  <div class="control-group">
-    <%= f.label :postcode, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :postcode, :class => 'form-control' %>
-    </div>
-    <%= error_span(@customer[:postcode]) %>
-  </div>
-
-  <div class="control-group">
-    <%= f.label :country, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :country, :class => 'form-control' %>
-    </div>
-    <%= error_span(@customer[:country]) %>
-  </div>
-
-  <h2>Addressassasss</h2>
+  <h2>Address</h2>
 
   <%= f.fields_for :address do |a| %>
 

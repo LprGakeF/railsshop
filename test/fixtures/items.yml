@@ -3,7 +3,13 @@
 one:
   name: MyString
   description: MyText
+  quantity_unit: Box
+  price: '9.99'
+  currency: EUR
 
 two:
   name: MyString
   description: MyText
+  quantity_unit: Box
+  price: 1000000
+  currency: USD

@@ -70,7 +70,7 @@ class ItemsController < ApplicationController
   def destroy
     @item.destroy
       redirect_to items_url, notice: 'Item was successfully destroyed.'
-      head :no_content
+      #head :no_content
     end
   end
 

@@ -2,10 +2,22 @@
 
 one:
   quantity: 1
-  item_id: 1
-  customer_id: 1
+  #item_id: 1
+  #customer_id: 1
+  item: one
+  customer: customer
+  is_in_process: false
+  is_dispatched: false
+  is_delivered: false
+  is_rejected: false
+  paid: false
 
 two:
   quantity: 1
   item_id: 1
   customer_id: 1
+  is_in_process: false
+  is_dispatched: false
+  is_delivered: false
+  is_rejected: false
+  paid: false

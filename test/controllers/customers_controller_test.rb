@@ -3,6 +3,8 @@ require 'test_helper'
 class CustomersControllerTest < ActionController::TestCase
   setup do
     @customer = customers(:one)
+    @admin = customers(:admin)
+    sign_in :customer, @admin
   end
 
   test "should get index" do
@@ -13,15 +15,15 @@ class CustomersControllerTest < ActionController::TestCase
 
   test "should get new" do
     get :new
-    assert_response :success
+    assert_response :redirect
   end
 
-  test "should create customer" do
-    assert_difference('Customer.count') do
+  test "should not create customer" do
+    assert_no_difference('Customer.count') do
       post :create, customer: { date_of_birth: @customer.date_of_birth, email: @customer.email, forename: @customer.forename, surname: @customer.surname }
     end
-
-    assert_redirected_to customer_path(assigns(:customer))
+    assert_response :redirect
+    #assert_redirected_to customer_path(assigns(:customer))
   end
 
   test "should show customer" do
@@ -36,11 +38,11 @@ class CustomersControllerTest < ActionController::TestCase
 
   test "should update customer" do
     patch :update, id: @customer, customer: { date_of_birth: @customer.date_of_birth, email: @customer.email, forename: @customer.forename, surname: @customer.surname }
-    assert_redirected_to customer_path(assigns(:customer))
+    assert_response :success
   end
 
-  test "should destroy customer" do
-    assert_difference('Customer.count', -1) do
+  test "should not destroy customer" do
+    assert_no_difference('Customer.count') do
       delete :destroy, id: @customer
     end
 

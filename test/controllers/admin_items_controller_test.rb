@@ -2,11 +2,15 @@ require 'test_helper'
 
 include Devise::TestHelpers
 
-class ItemsControllerTest < ActionController::TestCase
+class AdminItemsControllerTest < ActionController::TestCase
+
   setup do
+
+    @controller = ItemsController.new
+
     @item = items(:one)
-    @customer = customers(:customer)
     @admin = customers(:admin)
+    sign_in :customer, @admin
     #sign_in :customer, @admin
   end
 
