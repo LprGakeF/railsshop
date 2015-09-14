@@ -36,6 +36,8 @@
       <ul class="nav navbar-nav">
         <!--<li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>-->
 
+        <li><%= link_to "Items", items_path %></li>
+
         <% if current_customer.try(:admin?) %>
           <%= render :partial => 'layouts/admin.html.erb' %>
         <% else %>
@@ -43,10 +45,6 @@
           <%= render :partial => 'layouts/customer.html.erb' %>
         <% end %>
         <% end %>
-
-
-<!--TODO-->
-        <li><%= link_to "Items", items_path %></li>
 
         <% if has_any_category_any_items? %>
 
@@ -85,8 +83,6 @@
           aria-expanded="false">User<span class="caret"></span></a>
           <% end %>
           <ul class="dropdown-menu" role="menu">
-            <li><a href="#">Action</a></li>
-            <li><a href="#">Another action</a></li>
 
             <% if customer_signed_in? %>
               <li><%= link_to "Change your Data", edit_customer_registration_path %></li>

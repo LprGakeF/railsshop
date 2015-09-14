@@ -1,6 +1,6 @@
 class AddressesController < ApplicationController
   before_action :set_address, only: [:show, :edit, :update, :destroy]
-  #before_action :check_admin, only: [:new, :create, :destroy]
+  before_action :check_admin, only: [:index, :show, :new, :edit, :create, :update, :destroy]
 
   # GET /addresses
   # GET /addresses.json
@@ -76,7 +76,7 @@ class AddressesController < ApplicationController
 
     def check_admin
       if current_customer.try(:admin?)
-        flash[:notice] = 'You are not allowed to deleting or creating any addresses!'
+        #flash[:notice] = 'You are not allowed to deleting or creating any addresses!'
         redirect_to(addresses_url)
       end
     end
