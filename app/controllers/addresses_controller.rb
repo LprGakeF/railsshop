@@ -1,5 +1,6 @@
 class AddressesController < ApplicationController
   before_action :set_address, only: [:show, :edit, :update, :destroy]
+  #before_action :check_admin, only: [:new, :create, :destroy]
 
   # GET /addresses
   # GET /addresses.json
@@ -71,5 +72,12 @@ class AddressesController < ApplicationController
     def address_params
       #params[:address]
       params.require(@address).permit(:street, :house_number, :postcode, :country, :customer_id)
+    end
+
+    def check_admin
+      if current_customer.try(:admin?)
+        flash[:notice] = 'You are not allowed to deleting or creating any addresses!'
+        redirect_to(addresses_url)
+      end
     end
 end

@@ -36,9 +36,14 @@
       <ul class="nav navbar-nav">
         <!--<li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>-->
 
-        <li><%= link_to "Categorymanagement", categories_path %></li>
-        <li><%= link_to "Orderes", ordered_items_path %></li>
-        <li><%= link_to "Customers", customers_path %></li>
+        <% if current_customer.try(:admin?) %>
+          <%= render :partial => 'layouts/admin.html.erb' %>
+        <% else %>
+        <% if customer_signed_in? %>
+          <%= render :partial => 'layouts/customer.html.erb' %>
+        <% end %>
+        <% end %>
+
 
 <!--TODO-->
         <li><%= link_to "Items", items_path %></li>
@@ -112,13 +117,13 @@
     </div>
   </div>
 
-  <footer class="footer clearfix">
+  <!--<footer class="footer clearfix navbar navbar-fixed-bottom">
     <div class="panel-footer clearfix">
 
       <p class="text-muted text-center">You cannnot actually buy here anything in real - This is just a Testwebsite!</p>
 
     </div>
-  </footer>
+  </footer>-->
 
 </body>
 </html>

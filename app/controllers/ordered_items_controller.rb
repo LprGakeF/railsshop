@@ -31,10 +31,20 @@ class OrderedItemsController < ApplicationController
   # POST /ordered_items.json
   def create
 
-    if (current_customer.try(:admin?))
+    ## makes sure, that an order cannot be placed within item_id ##
+    if Item.all.empty?
+      redirect_to root_url, notice: 'There are no items, so you cannot purchase anything.' and return
+    end
+
+    if current_customer.try(:admin?)
       current_params = ordered_item_params
     else
       current_params = ordered_item_params_restricted_for_customer
+    end
+    ###############################################################
+
+    unless (params.has_key?(:item_id))
+      current_params[:item_id] = Item.all.first.id
     end
 
     current_params[:customer_id] = current_customer.id
@@ -83,7 +93,7 @@ class OrderedItemsController < ApplicationController
     unless current_customer.try(:admin?)
       if !@ordered_item.is_dispatched?
         @ordered_item.destroy
-        redirect_to ordered_items_url, notice: 'Ordered item was successfully destroyed.'
+        redirect_to ordered_items_url, notice: 'Ordered item was successfully destroyed.' and return
       else
         redirect_to ordered_items_url, error: 'You can\'t delete your order if it has already been shipped!' and return
         #return
@@ -91,7 +101,7 @@ class OrderedItemsController < ApplicationController
     end
 
     @ordered_item.destroy
-    redirect_to ordered_items_url, notice: 'Ordered item was successfully destroyed.'
+    redirect_to ordered_items_url, notice: 'Ordered item was successfully destroyed.' and return
   end
 
   private

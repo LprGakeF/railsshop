@@ -1,14 +1,14 @@
 require 'test_helper'
 
-class OrderedItemsControllerTest < ActionController::TestCase
+class CustomerOrderedItemsControllerTest < ActionController::TestCase
   setup do
     @controller = ItemsController.new
 
     @ordered_item = ordered_items(:one)
     #@admin = customers(:admin)   so jehts ^^
     #sign_in :customer, @admin
-    @one = customers(:one)
-    sign_in :customer, @one
+    @user = customers(:one)
+    sign_in :customer, @user
   end
 
   test "should get index" do
@@ -35,22 +35,23 @@ class OrderedItemsControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  test "should get edit" do
+  test "should not get edit" do
     sign_in @customer
     get :edit, id: @ordered_item
-    assert_response :success
+    assert_response :redirect
   end
 
-  test "should update ordered_item" do
+  test "should not update ordered_item" do
     patch :update, id: @ordered_item, ordered_item: { customer_id: @ordered_item.customer_id, item_id: @ordered_item.item_id, quantity: @ordered_item.quantity }
-    assert_redirected_to ordered_item_path(assigns(:ordered_item))
+    assert_response :redirect
+    #assert_redirected_to ordered_item_path(assigns(:ordered_item))
   end
 
   test "should destroy ordered_item" do
     assert_difference('OrderedItem.count', -1) do
       delete :destroy, id: @ordered_item
     end
-
-    assert_redirected_to ordered_items_path
+    assert_response :redirect
+    #assert_redirected_to ordered_items_path
   end
 end

@@ -53,22 +53,21 @@
 
         <td>
 
+          <% if current_customer.try(:admin?) %>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       edit_ordered_item_path(ordered_item), :class => 'btn btn-default btn-xs' %>
+          <% end %>
+
+          <% unless (current_customer.try(:admin?) || ordered_item.is_dispatched) %>
           <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
                       ordered_item_path(ordered_item),
                       :method => :delete,
                       :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
                       :class => 'btn btn-xs btn-danger' %>
+          <% end %>
         </td>
       </tr>
 
     <% end %>
   </tbody>
 </table>
-
-<% unless current_customer.try(:admin?) %>
-<%= link_to t('.new', :default => t("helpers.links.new")),
-            new_ordered_item_path,
-            :class => 'btn btn-primary' %>
-<% end %>

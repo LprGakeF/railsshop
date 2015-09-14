@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class OrderedItemsControllerTest < ActionController::TestCase
+class AdminOrderedItemsControllerTest < ActionController::TestCase
   setup do
     @controller = ItemsController.new
 

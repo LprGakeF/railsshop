@@ -13,9 +13,6 @@
 
 ActiveRecord::Schema.define(version: 20150908211342) do
 
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
-
   create_table "addresses", force: :cascade do |t|
     t.string   "street"
     t.string   "house_number"
@@ -26,7 +23,7 @@ ActiveRecord::Schema.define(version: 20150908211342) do
     t.datetime "updated_at",   null: false
   end
 
-  add_index "addresses", ["customer_id"], name: "index_addresses_on_customer_id", using: :btree
+  add_index "addresses", ["customer_id"], name: "index_addresses_on_customer_id"
 
   create_table "categories", force: :cascade do |t|
     t.string   "name"
@@ -39,8 +36,8 @@ ActiveRecord::Schema.define(version: 20150908211342) do
     t.integer "item_id",     null: false
   end
 
-  add_index "categories_items", ["category_id", "item_id"], name: "index_categories_items_on_category_id_and_item_id", using: :btree
-  add_index "categories_items", ["item_id", "category_id"], name: "index_categories_items_on_item_id_and_category_id", using: :btree
+  add_index "categories_items", ["category_id", "item_id"], name: "index_categories_items_on_category_id_and_item_id"
+  add_index "categories_items", ["item_id", "category_id"], name: "index_categories_items_on_item_id_and_category_id"
 
   create_table "customers", force: :cascade do |t|
     t.string   "forename"
@@ -65,8 +62,8 @@ ActiveRecord::Schema.define(version: 20150908211342) do
     t.boolean  "admin",                  default: false
   end
 
-  add_index "customers", ["email"], name: "index_customers_on_email", unique: true, using: :btree
-  add_index "customers", ["reset_password_token"], name: "index_customers_on_reset_password_token", unique: true, using: :btree
+  add_index "customers", ["email"], name: "index_customers_on_email", unique: true
+  add_index "customers", ["reset_password_token"], name: "index_customers_on_reset_password_token", unique: true
 
   create_table "items", force: :cascade do |t|
     t.string   "name"
@@ -97,10 +94,7 @@ ActiveRecord::Schema.define(version: 20150908211342) do
     t.boolean  "payment_mail_sent",  default: false
   end
 
-  add_index "ordered_items", ["customer_id"], name: "index_ordered_items_on_customer_id", using: :btree
-  add_index "ordered_items", ["item_id"], name: "index_ordered_items_on_item_id", using: :btree
+  add_index "ordered_items", ["customer_id"], name: "index_ordered_items_on_customer_id"
+  add_index "ordered_items", ["item_id"], name: "index_ordered_items_on_item_id"
 
-  add_foreign_key "addresses", "customers"
-  add_foreign_key "ordered_items", "customers"
-  add_foreign_key "ordered_items", "items"
 end
