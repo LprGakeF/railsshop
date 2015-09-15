@@ -5,17 +5,10 @@ class ItemsController < ApplicationController
 
   def index
     if params.has_key?(:categories)
-      category_name = params[:categories]
-      @items = Item.all
-      @new_items = Array.new
-      @items.each do |i|
-        i.categories.each do |c|
-          if c.name == category_name
-            @new_items.append(i)
-          end
-        end
-      end
-      @items = @new_items
+      #category_name = params[:categories]
+      getItemsInCategory(params[:categories])
+    elsif params.has_key?(:search)
+      getSearchedItems(params[:search])
     else
       @items = Item.all
     end
@@ -89,5 +82,35 @@ class ItemsController < ApplicationController
       unless current_customer.try(:admin?)
         flash[:notice] = 'You are not allowed to do this!'
         redirect_to(items_url)
+      end
+    end
+
+    def getItemsInCategory(category)
+      @items = Item.all
+      @new_items = Array.new
+      @items.each do |i|
+        i.categories.each do |c|
+          if c.name == category
+            @new_items.append(i)
+          end
+        end
+      end
+      @items = @new_items
+    end
+
+    def getSearchedItems(search)
+      search = search.downcase
+      @items = Item.all
+      @new_items = Array.new
+      @items.each do |i|
+        if i.name.downcase.include?(search)
+          @new_items.append(i)
+        end
+      end
+      if @new_items.any?
+        @items = @new_items
+        flash.now[:notice] = 'Your search was successful'
+      else
+        flash.now[:error] = 'No items found that satisfy the search!'
       end
     end

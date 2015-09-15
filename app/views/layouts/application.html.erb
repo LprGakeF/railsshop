@@ -60,13 +60,11 @@
         <% end %>
           </ul>
         </li>
-
       </ul>
 
 
 
-
-      <ul class="nav navbar-nav navbar-right">
+        <ul class="nav navbar-nav navbar-right">
 
         <li class="dropdown">
           <% if customer_signed_in? %>
@@ -94,7 +92,12 @@
         </li>
       </ul>
 
-
+      <form class="navbar-form navbar-right" role="search">
+        <%= form_tag(items_path, :method => "get", id: "search-form", html: {class: 'form-group'}) do %>
+        <%= text_field_tag :search, params[:search], placeholder: "Search Items", class: "form-control" %>
+        <%= submit_tag "Search", :class => 'btn btn-default',:name => nil%>
+        <% end %>
+      </form>
 
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
