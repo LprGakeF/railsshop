@@ -8,8 +8,10 @@
       <th><%= model_class.human_attribute_name('Order number') %></th>
       <th><%= model_class.human_attribute_name(:quantity) %></th>
       <th><%= model_class.human_attribute_name(:item_id) %></th>
-      <th><%= model_class.human_attribute_name(:customer_id) %></th>
-      <th><%= model_class.human_attribute_name(:created_at) %></th>
+      <% if current_customer.try(:admin?) %>
+        <th><%= model_class.human_attribute_name(:customer_id) %></th>
+      <% end %>
+      <th><%= model_class.human_attribute_name('Ordered at') %></th>
       <th><%= "Status" %></th>
       <% if current_customer.try(:admin?) %>
         <th><%=t '.actions', :default => t("helpers.actions") %></th>
@@ -28,8 +30,9 @@
         <!--<td><%= ordered_item.item_id %></td>-->
         <td><%= ordered_item.item.name %></td>
         <!--<td><%= ordered_item.customer_id %></td>-->
-        <td><%= ordered_item.customer.surname %>
-
+        <% if current_customer.try(:admin?) %>
+          <td><%= ordered_item.customer.forename %> <%= ordered_item.customer.surname %></td>
+        <% end %>
         <td><%=l ordered_item.created_at, :format => :long %></td>
 
           <% if ordered_item.is_rejected %>

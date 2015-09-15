@@ -64,15 +64,10 @@
       </ul>
 
 
-      <% if current_customer.try(:admin?) %>
-      <ul class="nav navbar-nav navbar-right label-warning">
-      <% else %>
-        <% if customer_signed_in? %>
-        <ul class="nav navbar-nav navbar-right label-success">
-        <% else %>
-        <ul class="nav navbar-nav navbar-right label-info">
-        <% end %>
-      <% end %>
+
+
+      <ul class="nav navbar-nav navbar-right">
+
         <li class="dropdown">
           <% if customer_signed_in? %>
           <% customer_name = current_customer.forename + " " + current_customer.surname %>
@@ -98,6 +93,8 @@
 
         </li>
       </ul>
+
+
 
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
