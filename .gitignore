@@ -24,4 +24,4 @@
 /app/views/*_
 
 # Contains username and password
-config/initializers/setup_mail.rb
+# config/initializers/setup_mail.rb
