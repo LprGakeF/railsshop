@@ -68,12 +68,12 @@ class OrderedItemsController < ApplicationController
     if @ordered_item.update(current_params)
 
       if @ordered_item.is_dispatched && !@ordered_item.shipping_mail_sent
-        CustomerMailer.shipping_email(current_customer, @ordered_item).deliver
+        CustomerMailer.shipping_email(@ordered_item.customer, @ordered_item).deliver
         @ordered_item.update_attribute(:shipping_mail_sent, true)
       end
 
       if @ordered_item.paid && !@ordered_item.payment_mail_sent
-        CustomerMailer.payment_email(current_customer, @ordered_item).deliver
+        CustomerMailer.payment_email(@ordered_item.customer, @ordered_item).deliver
         @ordered_item.update_attribute(:payment_mail_sent, true)
       end
 

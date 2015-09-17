@@ -4,7 +4,7 @@
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
   </head>
   <body>
-    <h2>Thank you for your order, <%= @customer.surname %>!</h2>
+    <h2>Thank you for your order, <%= @customer.forename %>!</h2>
     <p>
       You have successfully purchased
       <%= pluralize(@ordered_item.quantity, @ordered_item.item.quantity_unit) %> of

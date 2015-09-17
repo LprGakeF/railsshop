@@ -7,7 +7,7 @@ applications:
   domain: de.a9sapp.eu
   path: .
   services:
-  - postgresql-appname
+  - pg-railsshop
   - swift-railsshop
   env:
     RAILS_ENV: production
